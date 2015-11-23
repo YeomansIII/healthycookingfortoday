@@ -1,0 +1,54 @@
+@import 'colors';
+
+body {
+  background-color: white;
+}
+nav ul a,
+nav .brand-logo {
+  color: $text-color;
+}
+p {
+  line-height: 2rem;
+}
+.button-collapse {
+  color: $teal;
+}
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: $white;
+  color: $semi-trans9-white;
+}
+.parallax-container .section {
+  width: 100%;
+}
+@media only screen and (max-width: 992px) {
+  .parallax-container .section {
+    position: absolute;
+    top: 40%;
+  }
+  .index-banner .section {
+    top: 10%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .index-banner .section {
+    top: 0;
+  }
+}
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+.page-footer {
+  margin: 0;
+}
+.imageposition-bottom {
+  background-position: bottom;
+}
+.text-shadow {
+  text-shadow: 2px 2px 10px $black;
+}

@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+{% import }
+{% load admin_urls %}
+{% load markdown_deux_tags %}
+{# {% load comments %}#}
+
+{% block title %}
+	{{post.title}}
+{% endblock %}
+
+{% block content %}
+	<h1>{{post.title}}  {% if user.is_authenticated %}<small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>{% endif %}</h1>
+	<p>By: {{post.author}}</p>
+	<p>{{post.created_at}}</p>
+	<p>{{post.body|markdown}}</p>
+
+{% endblock %}

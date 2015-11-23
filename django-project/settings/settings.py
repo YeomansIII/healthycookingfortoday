@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_PATH = (os.path.join(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))), '..'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -35,6 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'settings',
+    'taggit',
+    'markdown_deux',
+    'frontend',
+    'blogger',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,7 +60,7 @@ ROOT_URLCONF = 'settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,6 +73,17 @@ TEMPLATES = [
     },
 ]
 
+BLOG_SETTINGS = {
+    'defaults': {  # change the defaults of models and some constats for views
+        'auto_publish': False,
+        'auto_promote': False,
+    },
+    'info': {  # attached to all responses so the information is available to the templates.
+        'BLOG_TITLE': 'My Blog Name',
+        'BLOG_SUBTITLE': 'Blog subname',
+    }
+}
+
 WSGI_APPLICATION = 'settings.wsgi.application'
 
 import ldap
@@ -74,8 +92,9 @@ from django_auth_ldap.config import LDAPSearch, PosixGroupType
 AUTH_LDAP_SERVER_URI = "ldap://yeomans.io"
 
 AUTH_LDAP_GROUP_SEARCH = LDAPSearch("ou=groups,dc=yeomans,dc=io",
-    ldap.SCOPE_SUBTREE, "(objectClass=posixGroup)"
-)
+                                    ldap.SCOPE_SUBTREE,
+                                    "(objectClass=posixGroup)"
+                                    )
 AUTH_LDAP_GROUP_TYPE = PosixGroupType()
 AUTH_LDAP_CACHE_GROUPS = True
 
@@ -89,7 +108,7 @@ AUTH_LDAP_USER_FLAGS_BY_GROUP = {
 AUTH_LDAP_BIND_DN = ""
 AUTH_LDAP_BIND_PASSWORD = ""
 AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=users,dc=yeomans,dc=io",
-    ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+                                   ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
 
 AUTHENTICATION_BACKENDS = (
     'django_auth_ldap.backend.LDAPBackend',
@@ -137,3 +156,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'build/static'),
+)
