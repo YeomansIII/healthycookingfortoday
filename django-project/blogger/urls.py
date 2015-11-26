@@ -18,7 +18,8 @@ api_patterns = patterns('blogger.views',
 api_patterns = format_suffix_patterns(api_patterns, allowed=['json', 'api'])
 
 urlpatterns = patterns('blogger.views',
-                       url(r'^$', 'list', name='all_archive'),
+                       url(r'^$', 'view_latest', name='index'),
+                       url(r'^list$', 'list', name='all_archive'),
                        url(r'^(?P<year>\d{4})/$', 'list',
                            name="yearly_archive"),
                        url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$',

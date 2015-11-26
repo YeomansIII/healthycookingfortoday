@@ -70,13 +70,13 @@ def list(request, year=None, month=None, tag=None, author=None):
     data.update(sidebar_data)
 
     # TODO: refactor this if if if if block
-    #tag archive
+    # tag archive
     if tag:
         posts = Post.objects.filter(published=True, tags__slug=tag)
         data['posts'] = posts
         data['section_title'] = _("Tag archive")
         return render_on_list(request, data)
-    #author archive
+    # author archive
     if author:
         fname, lname = author.split('-')
         posts = Post.objects.filter(published=True,
@@ -86,14 +86,14 @@ def list(request, year=None, month=None, tag=None, author=None):
         data['posts'] = posts
         data['section_title'] = _("Author archive")
         return render_on_list(request, data)
-    #all posts
+    # all posts
     if not year:
         posts = Post.objects.filter(published=True).order_by('-created_at')
         data['enable_promoted'] = True
         data['posts'] = posts
         data['section_title'] = _("Posts")
         return render_on_list(request, data)
-    #yearly archive
+    # yearly archive
     if not month:
         posts = Post.objects.filter(published=True,
                                     created_at__year=year
@@ -101,7 +101,7 @@ def list(request, year=None, month=None, tag=None, author=None):
         data['posts'] = posts
         data['section_title'] = _("Yearly Archive")
         return render_on_list(request, data)
-    #monthly archive
+    # monthly archive
     else:
         posts = Post.objects.filter(published=True,
                                     created_at__year=year,
@@ -131,7 +131,19 @@ def view_post(request, slug):
                               context_instance=RequestContext(request)
                               )
 
+
+def view_latest(request):
+    post = Post.objects.order_by('-created_at')[0]
+    data = {
+        'post': post
+    }
+    return render_to_response('index.html', data,
+                              context_instance=RequestContext(request)
+                              )
+
 # Begin API Views
+
+
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({

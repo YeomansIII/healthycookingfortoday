@@ -1,18 +1,25 @@
 module.exports = function(grunt) {
 
+  // Configurable paths
+  var config = {
+    src: 'django-project',
+    build: 'django-project/build'
+  };
+
   // Project configuration.
   grunt.initConfig({
+    config: config,
     pkg: grunt.file.readJSON('package.json'),
 
     // Task configuration goes here.
 
     concat: {
       app: {
-        src: ['django-project/static/js/app/**/*.js'],
+        src: ['<%= config.src %>/static/js/app/**/*.js'],
         dest: 'django-project/build/static/js/app.js'
       },
       vendor: {
-        src: ['django-project/static/js/vendor/**/*.js'],
+        src: ['<%= config.src %>/static/js/vendor/**/*.js'],
         dest: 'django-project/build/static/js/lib.js'
       }
     },
@@ -20,12 +27,12 @@ module.exports = function(grunt) {
     uglify: {
       app: {
         files: {
-          'django-project/build/static/js/app.min.js': ['django-project/static/js/app/**/*.js']
+          'django-project/build/static/js/app.min.js': ['<%= config.src %>/static/js/app/**/*.js']
         }
       },
       vendor: {
         files: {
-          'django-project/build/static/js/lib.min.js': ['django-project/static/js/vendor/**/*.js']
+          'django-project/build/static/js/lib.min.js': ['<%= config.src %>/static/js/vendor/**/*.js']
         }
       }
     },
@@ -36,7 +43,7 @@ module.exports = function(grunt) {
           sourceMap: true
         },
         files: {
-          'django-project/build/static/css/main.css': 'django-project/static/scss/main.scss'
+          'django-project/build/static/css/main.css': '<%= config.src %>/static/scss/main.scss'
         }
       },
       deploy: {
@@ -45,7 +52,43 @@ module.exports = function(grunt) {
           outputStyle: 'compressed'
         },
         files: {
-          'django-project/build/static/css/main.min.css': 'django-project/static/scss/main.scss'
+          'django-project/build/static/css/main.min.css': '<%= config.src %>/static/scss/main.scss'
+        }
+      }
+    },
+
+    bowercopy: {
+      options: {
+        srcPrefix: 'bower_components'
+      },
+      scripts: {
+        options: {
+          destPrefix: '<%= config.build %>/static/js'
+        },
+        files: {
+          'jquery.min.js': 'jquery/dist/jquery.min.js',
+          'materialize.min.js': 'Materialize/dist/js/materialize.min.js'
+        }
+      },
+      css: {
+        options: {
+          destPrefix: '<%= config.build %>/static/css'
+        },
+        files: {
+          'materialize.min.css': 'Materialize/dist/css/materialize.min.css',
+          'materialdesignicons.min.css': 'mdi/css/materialdesignicons.min.css',
+        }
+      },
+      fonts: {
+        options: {
+          destPrefix: '<%= config.build %>/static/fonts'
+        },
+        files: {
+          'materialdesignicons-webfont.eot': 'mdi/fonts/materialdesignicons-webfont.eot',
+          'materialdesignicons-webfont.svg': 'mdi/fonts/materialdesignicons-webfont.svg',
+          'materialdesignicons-webfont.ttf': 'mdi/fonts/materialdesignicons-webfont.ttf',
+          'materialdesignicons-webfont.woff': 'mdi/fonts/materialdesignicons-webfont.woff',
+          'materialdesignicons-webfont.woff2': 'mdi/fonts/materialdesignicons-webfont.woff2'
         }
       }
     },
@@ -81,6 +124,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -90,6 +134,7 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'sass',
+    'bowercopy',
     'imagemin',
     'watch'
   ]);
