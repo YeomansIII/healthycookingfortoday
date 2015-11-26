@@ -16,23 +16,23 @@ module.exports = function(grunt) {
     concat: {
       app: {
         src: ['<%= config.src %>/static/js/app/**/*.js'],
-        dest: 'django-project/build/static/js/app.js'
+        dest: '<%= config.build %>/static/js/app.js'
       },
       vendor: {
         src: ['<%= config.src %>/static/js/vendor/**/*.js'],
-        dest: 'django-project/build/static/js/lib.js'
+        dest: '<%= config.build %>/static/js/lib.js'
       }
     },
 
     uglify: {
       app: {
         files: {
-          'django-project/build/static/js/app.min.js': ['<%= config.src %>/static/js/app/**/*.js']
+          '<%= config.build %>/static/js/app.min.js': ['<%= config.src %>/static/js/app/**/*.js']
         }
       },
       vendor: {
         files: {
-          'django-project/build/static/js/lib.min.js': ['<%= config.src %>/static/js/vendor/**/*.js']
+          '<%= config.build %>/static/js/lib.min.js': ['<%= config.src %>/static/js/vendor/**/*.js']
         }
       }
     },
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
           sourceMap: true
         },
         files: {
-          'django-project/build/static/css/main.css': '<%= config.src %>/static/scss/main.scss'
+          '<%= config.build %>/static/css/main.css': '<%= config.src %>/static/scss/main.scss'
         }
       },
       deploy: {
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
           outputStyle: 'compressed'
         },
         files: {
-          'django-project/build/static/css/main.min.css': '<%= config.src %>/static/scss/main.scss'
+          '<%= config.build %>/static/css/main.min.css': '<%= config.src %>/static/scss/main.scss'
         }
       }
     },
@@ -97,9 +97,9 @@ module.exports = function(grunt) {
       dynamic: { // Another target
         files: [{
           expand: true, // Enable dynamic expansion
-          cwd: 'django-project/static/images/', // Src matches are relative to this path
+          cwd: '<%= config.src %>/static/images/', // Src matches are relative to this path
           src: ['**/*.{png,jpg,gif}'], // Actual patterns to match
-          dest: 'django-project/build/static/images/' // Destination path prefix
+          dest: '<%= config.build %>/static/images/' // Destination path prefix
         }]
       }
     },
@@ -109,11 +109,11 @@ module.exports = function(grunt) {
         livereload: true
       },
       javascript: {
-        files: ['django-project/static/js/app/**/*.js'],
+        files: ['<%= config.src %>/static/js/app/**/*.js'],
         tasks: ['concat']
       },
       sass: {
-        files: 'django-project/static/scss/**/*.scss',
+        files: '<%= config.src %>/static/scss/**/*.scss',
         tasks: ['sass:dev']
       }
     }

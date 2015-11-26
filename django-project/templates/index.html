@@ -28,15 +28,15 @@ HealthyCookingForToday
   </div>
 </div>
 
-
 <div class="container">
-  <div class="section">
-    <h1>{{post.title}} {% if user.is_authenticated %}
+  <div class="section post">
+    <h1 class="post-title">{{post.title}} {% if user.is_authenticated %}
       <small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>
       {% endif %}</h1>
-    <p>By: {{post.author}}</p>
-    <p>{{post.created_at}}</p>
-    <p>{{post.body|markdown}}</p>
+    <div class="post-info">
+      <p class="post-created-author">Posted by {{post.author}} on {{post.created_at}}</p>
+    </div>
+    <p class="post-body">{{post.body|markdown}}</p>
   </div>
 </div>
 {% endblock %}

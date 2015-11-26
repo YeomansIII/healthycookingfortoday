@@ -1,7 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,300,500,700);
 @import 'colors';
-
+@import 'post';
 body {
-  background-color: white;
+  background-color: $white;
+  font-family: 'Roboto', sans-serif;
 }
 nav ul a,
 nav .brand-logo {
