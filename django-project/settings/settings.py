@@ -39,9 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'settings',
     'taggit',
-    'markdown_deux',
     'frontend',
     'blogger',
+    'redactor'
 )
 
 MIDDLEWARE_CLASSES = (

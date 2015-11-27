@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models
+from redactor.widgets import AdminRedactorEditor
 from .models import Post
 
 
@@ -10,6 +12,9 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['author', 'created_at', 'published']
     search_fields = ('title', 'body')
     prepopulated_fields = {"slug": ("title",)}
+    formfield_overrides = {
+        models.TextField: {'widget': AdminRedactorEditor},
+    }
 
     # http://stackoverflow.com/questions/753704/manipulating-data-in-djangos-admin-panel-on-save
     def save_model(self, request, obj, form, change):
