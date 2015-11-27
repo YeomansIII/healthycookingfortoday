@@ -67,7 +67,8 @@ module.exports = function(grunt) {
         },
         files: {
           'jquery.min.js': 'jquery/dist/jquery.min.js',
-          'materialize.min.js': 'Materialize/dist/js/materialize.min.js'
+          'materialize.min.js': 'Materialize/dist/js/materialize.min.js',
+          'quill.min.js': 'quill/dist/quill.min.js'
         }
       },
       css: {
@@ -77,6 +78,8 @@ module.exports = function(grunt) {
         files: {
           'materialize.min.css': 'Materialize/dist/css/materialize.min.css',
           'materialdesignicons.min.css': 'mdi/css/materialdesignicons.min.css',
+          'quill.base.css': 'quill/dist/quill.base.css',
+          'quill.snow.css': 'quill/dist/quill.snow.css'
         }
       },
       fonts: {
