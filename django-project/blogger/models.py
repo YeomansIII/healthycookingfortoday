@@ -56,8 +56,9 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True,
                              verbose_name=_("title"))
     body = models.TextField(verbose_name=_("body"))
-    created_at = models.DateField(auto_now_add=True,
-                                  verbose_name=_("created at"))
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name=_("created at"))
+    publish_at = models.DateTimeField(verbose_name=_("publish at"))
     # TODO: last modified?
     published = models.BooleanField(default=BLOG_SETTINGS['auto_publish'],
                                     verbose_name=_("published?"))

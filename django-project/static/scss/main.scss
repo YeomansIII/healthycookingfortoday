@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,300,500,700);
-@import 'colors';
+@import 'variables';
+@import 'common';
 @import 'post';
 body {
   background-color: $white;
@@ -50,7 +51,4 @@ p {
 }
 .imageposition-bottom {
   background-position: bottom;
-}
-.text-shadow {
-  text-shadow: 2px 2px 10px $black;
 }

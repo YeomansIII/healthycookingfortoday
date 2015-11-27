@@ -10,6 +10,7 @@ from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import permissions
 from blogger.models import Post, Author
+import datetime
 from .permissions import IsOwnerOrReadOnly
 from .serializers import PostSerializer, AuthorSerializer
 
@@ -20,11 +21,11 @@ def get_sidebar_data():
     promoted_posts = Post.objects.filter(
         published=True, promoted=True).order_by('-created_at')
     popular_posts = Post.popular_posts.filter(
-        published=True).order_by('-created_at')[:5]
+        published=True).order_by('-publish_at')[:5]
     recent_posts = Post.objects.filter(
-        published=True).order_by('-created_at')[:5]
+        published=True).order_by('-publish_at')[:5]
     archive = Post.objects.filter(
-        published=True).dates('created_at', 'month', order='DESC')
+        published=True).datetimes('publish_at', 'month', order='DESC')
     tags = Tag.objects.all()
     authors = Author.objects.all()
     data = {
@@ -72,41 +73,48 @@ def list(request, year=None, month=None, tag=None, author=None):
     # TODO: refactor this if if if if block
     # tag archive
     if tag:
-        posts = Post.objects.filter(published=True, tags__slug=tag)
+        posts = Post.objects.filter(publish_at__lte=datetime.datetime.now(),
+                                    published=True,
+                                    tags__slug=tag)
         data['posts'] = posts
         data['section_title'] = _("Tag archive")
         return render_on_list(request, data)
+
     # author archive
     if author:
         fname, lname = author.split('-')
-        posts = Post.objects.filter(published=True,
+        posts = Post.objects.filter(publish_at__lte=datetime.datetime.now(),
+                                    published=True,
                                     author__first_name=fname,
                                     author__last_name=lname
-                                    ).order_by('-created_at')
+                                    ).order_by('-publish_at')
         data['posts'] = posts
         data['section_title'] = _("Author archive")
         return render_on_list(request, data)
     # all posts
     if not year:
-        posts = Post.objects.filter(published=True).order_by('-created_at')
+        posts = Post.objects.filter(publish_at__lte=datetime.datetime.now(),
+                                    published=True).order_by('-publish_at')
         data['enable_promoted'] = True
         data['posts'] = posts
-        data['section_title'] = _("Posts")
+        data['section_title'] = _("All Posts")
         return render_on_list(request, data)
     # yearly archive
     if not month:
-        posts = Post.objects.filter(published=True,
+        posts = Post.objects.filter(publish_at__lte=datetime.datetime.now(),
+                                    published=True,
                                     created_at__year=year
-                                    ).order_by('-created_at')
+                                    ).order_by('-publish_at')
         data['posts'] = posts
         data['section_title'] = _("Yearly Archive")
         return render_on_list(request, data)
     # monthly archive
     else:
-        posts = Post.objects.filter(published=True,
+        posts = Post.objects.filter(publish_at__lte=datetime.datetime.now(),
+                                    published=True,
                                     created_at__year=year,
                                     created_at__month=month
-                                    ).order_by('-created_at')
+                                    ).order_by('-publish_at')
 
         data['posts'] = posts
         data['section_title'] = _("Monthly Archive")
@@ -133,7 +141,8 @@ def view_post(request, slug):
 
 
 def view_latest(request):
-    post = Post.objects.order_by('-created_at')[0]
+    post = Post.objects.filter(
+        publish_at__lte=datetime.datetime.now()).order_by('-publish_at')[0]
     data = {
         'post': post
     }

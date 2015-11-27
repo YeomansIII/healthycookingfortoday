@@ -1,0 +1,37 @@
+.halign-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.halign-row {
+  .row {
+    display: flex;
+    justify-content: center;
+  }
+}
+.allalign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.aa-col {
+    flex-direction: column;
+  }
+}
+.text-shadow {
+  text-shadow: 0 0 25px $black;
+}
+.header-tape {
+  background-color: $semi-trans6-black;
+  color: $white;
+  width: auto;
+  display: inline-block;
+  margin: 10px auto;
+  @at-root {
+    h1#{&} {
+      padding: 15px;
+    }
+    h5#{&} {
+      padding: 10px;
+    }
+  }
+}

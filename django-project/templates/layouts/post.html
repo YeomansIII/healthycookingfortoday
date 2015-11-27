@@ -1,0 +1,12 @@
+{% load admin_urls %}
+{% load markdown_deux_tags %}
+
+<div class="section post">
+  <h1 class="post-title">{{post.title}} {% if user.is_authenticated %}
+    <small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>
+    {% endif %}</h1>
+  <div class="flow-text post-info">
+    <p class="post-created-author"><i>Posted by {{post.author}} on {{post.publish_at.date}}</i></p>
+  </div>
+  <div class="post-body flow-text">{{post.body|markdown}}</div>
+</div>

@@ -6,6 +6,14 @@
 {# {% load comments %}#}
 
 {% block content %}
+
+<div id="index-banner" class="index-banner parallax-container allalign">
+  <h1 class="header center white-text header-tape">{{ section_title }}</h1>
+  <div class="parallax">
+    <img class="imageposition-bottom" src="/static/images/autumn-2.jpg" alt="Autumn parallax image">
+  </div>
+</div>
+<div class="post-list-wrapper halign-row">
     {% if enable_promoted %}
         {% if promoted_posts %}
             <h3 class="section-header">Promoted Posts</h3>
@@ -31,24 +39,29 @@
     {% endif %}
 
 	{% if posts %}
-	    <h3 class="section-header">{{section_title}}</h3>
 	    {% for p in posts %}
-	        <h3><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url p|admin_urlname:'change' p.id %}">(edit)</a></small>{% endif %}</h3>
-                <p>{{p.created_at}} |
-                    {% if p.tags.count < 1 %}
-                        No tags
-                    {% endif %}
-                    {% for t in p.tags.all %}
-                        <a href="{{t.get_absolute_url}}">{{t}}</a>
-                        {% if not forloop.last %}
-                        ,
-                        {% endif%}
-                    {%endfor%}
-                </p>
-	        	<p>{{p.body|truncatechars:300|markdown}}</p>
-                {% if not forloop.last %}
-                    <hr>
-                {% endif %}
+        <div class="row">
+          <div class="col s12 m10 l6">
+            <div class="card-panel hoverable post">
+              <div class="card-content">
+      	        <h3 class="post-title"><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url p|admin_urlname:'change' p.id %}">(edit)</a></small>{% endif %}</h3>
+                      <p>{{p.publish_at}} |
+                          {% if p.tags.count < 1 %}
+                              No tags
+                          {% endif %}
+                          {% for t in p.tags.all %}
+                              <a href="{{t.get_absolute_url}}">{{t}}</a>
+                              {% if not forloop.last %}
+                              ,
+                              {% endif%}
+                          {%endfor%}
+                      </p>
+      	        	<div class="post-body flow-text">{{p.body|truncatechars:300|markdown}}</div>
+                </div>
+            </div>
+          </div>
+        </div>
 	    {% endfor %}
 	{% endif %}
+</div>
 {% endblock %}

@@ -4,5 +4,18 @@
     small {
       font-size: 15pt;
     }
+    @media #{$small-and-down} {
+      font-size: 3em;
+    }
+  }
+  .post-info {
+    font-size: 1.2em;
   }
 }
+.post-list-wrapper {
+  padding: 5vw 0;
+}
+
+// .post.card {
+//   width: 100%;
+// }
