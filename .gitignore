@@ -56,6 +56,10 @@ docs/_build/
 # PyBuilder
 target/
 
+migrations/
+django_project/*/migrations/
+
 # node
 node_modules/
 bower_components/
+
