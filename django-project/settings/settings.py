@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'taggit',
     'frontend',
     'blogger',
-    'redactor'
+    'redactor',
+    'blanc_basic_assets'
 )
 
 MIDDLEWARE_CLASSES = (
