@@ -30,7 +30,7 @@
                                 {% endif%}
                             {%endfor%}
                         </p>
-                        <p>{{p.body|truncatechars:300|markdown}}</p>
+                        <p>{{p.body|truncatechars:300|striptags}}</p>
                         {% if not forloop.last %}
                             <hr>
                         {% endif %}
@@ -56,7 +56,7 @@
                               {% endif%}
                           {%endfor%}
                       </p>
-      	        	<div class="post-body flow-text">{{p.body|truncatechars:300|markdown}}</div>
+      	        	<div class="post-body flow-text">{{p.body|truncatechars:300|striptags}}</div>
                 </div>
             </div>
           </div>

@@ -27,7 +27,11 @@ import config
 DEBUG = config.DEBUG
 ALLOWED_HOSTS = config.ALLOWED_HOSTS
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+REDACTOR_OPTIONS = {'lang': 'en'}
+REDACTOR_UPLOAD = 'uploads/'
 # Application definition
 
 INSTALLED_APPS = (
@@ -42,6 +46,7 @@ INSTALLED_APPS = (
     'frontend',
     'blogger',
     'redactor',
+    'markdown_deux',
     'blanc_basic_assets'
 )
 

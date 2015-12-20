@@ -49,6 +49,8 @@ coverage.xml
 
 # Django stuff:
 *.log
+django-project/media/
+django-project/uploads/
 
 # Sphinx documentation
 docs/_build/
@@ -57,9 +59,8 @@ docs/_build/
 target/
 
 migrations/
-django_project/*/migrations/
+django-project/*/migrations/
 
 # node
 node_modules/
 bower_components/
-
