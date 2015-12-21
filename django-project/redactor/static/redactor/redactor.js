@@ -5268,9 +5268,11 @@
 
             image: String() +
               '<section id="redactor-modal-image-insert">' +
+              '<form>' +
               '<label>' + this.lang.get('filename') + '</label>' +
               '<input type="text" id="redactor-filename" names="title"/><br><br>' +
               '<div id="redactor-modal-image-droparea"></div>' +
+              '</form>' +
               '</section>',
 
             file: String() +
