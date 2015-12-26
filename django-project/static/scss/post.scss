@@ -1,6 +1,46 @@
 .post {
+  .featured-post-title {
+    font-weight: 900;
+    small {
+      font-size: 15pt;
+    }
+    @media #{$small-and-down} {
+      font-size: 3em;
+    }
+  }
   .post-title {
     font-weight: 900;
+    background-image: url("http://www.healthycookingfortoday.com/IMG_0848.JPG");
+    -webkit-box-shadow: inset 0px -127px 95px -63px rgba(0,0,0,0.85);
+    -moz-box-shadow: inset 0px -127px 95px -63px rgba(0,0,0,0.85);
+    box-shadow: inset 0px -127px 95px -63px rgba(0,0,0,0.85);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    padding-top:200px;
+    padding-left:40px;
+    margin-top:0;
+    color: white;
+    small {
+      font-size: 15pt;
+    }
+    @media #{$small-and-down} {
+      font-size: 3em;
+    }
+  }
+  .post-title-list {
+    font-weight: 900;
+    background-image: url("http://www.healthycookingfortoday.com/IMG_0848.JPG");
+    -webkit-box-shadow: inset 0px -127px 95px -63px rgba(0,0,0,0.85);
+    -moz-box-shadow: inset 0px -127px 95px -63px rgba(0,0,0,0.85);
+    box-shadow: inset 0px -127px 95px -63px rgba(0,0,0,0.85);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    padding-top:100px;
+    padding-left:20px;
+    margin-top:0;
+    color: white;
     small {
       font-size: 15pt;
     }
@@ -25,3 +65,10 @@
 // .post.card {
 //   width: 100%;
 // }
+
+
+.card-image {
+  height:150px;
+  overflow: hidden;
+  vertical-align: middle;
+}
