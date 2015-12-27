@@ -42,9 +42,13 @@
 	    {% for p in posts %}
         <div class="row">
           <div class="col s12 m10 l6">
-            <div class="card-panel hoverable post">
+            <div class="card hoverable post">
+	      <div class="card-image">
+		<img src="http://www.healthycookingfortoday.com/IMG_0848.JPG" >
+		<span class="card-title">{{p.title}}</span>
+	      </div>
               <div class="card-content">
-      	        <h3 class="post-title"><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url p|admin_urlname:'change' p.id %}">(edit)</a></small>{% endif %}</h3>
+      	        <!--<h3 class="post-title-list"><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url p|admin_urlname:'change' p.id %}">(edit)</a></small>{% endif %}</h3>-->
                       <p>{{p.publish_at}} |
                           {% if p.tags.count < 1 %}
                               No tags

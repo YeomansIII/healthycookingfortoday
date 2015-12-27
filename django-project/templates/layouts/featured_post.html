@@ -1,8 +1,7 @@
 {% load admin_urls %}
 
 <div class="section post">
-  <!--<img class="post-head-img" src="http://www.healthycookingfortoday.com/IMG_0848.JPG"/>-->
-  <h1 class="post-title">{{post.title}} {% if user.is_authenticated %}
+  <h1 class="featured-post-title">{{post.title}} {% if user.is_authenticated %}
     <small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>
     {% endif %}</h1>
   <div class="flow-text post-info">
