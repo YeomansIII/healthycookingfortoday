@@ -3,6 +3,7 @@ import uuid
 import datetime
 from django.conf import settings
 from redactor.utils import import_class
+from blanc_basic_assets.models import Image as BlancImage
 
 
 class BaseUploaderRedactor(object):
@@ -42,9 +43,17 @@ class BaseUploaderRedactor(object):
         """
         Save file and return real path
         """
+        print('save_file')
         if not hasattr(self, 'real_path'):
-            self.real_path = self.file_storage.save(self.get_full_path(),
-                                                    self.get_file())
+            print('save_file hasattr')
+            image = BlancImage(title=self.get_full_path(), file=self.get_file())
+            image.save()
+            print('image: '+image)
+            self.real_path = image.get_absolute_url()
+            print('path: '+self.real_path)
+            # self.real_path = self.file_storage.save(self.get_full_path(),
+            #                                         self.get_file())
+
         return self.real_path
 
     def get_url(self):
@@ -77,6 +86,7 @@ class SimpleUploader(BaseUploaderRedactor):
     """
     Standard uploader: default directory, default name
     """
+
     def get_filename(self):
         return self.upload_file.name
 
@@ -90,6 +100,7 @@ class UUIDUploader(SimpleUploader):
 
     /REDACTOR_UPLOAD/546de5b5-cf05-4b47-9379-3f964732b802.etc
     """
+
     def get_filename(self):
         if not hasattr(self, 'filename'):
             # save filename prevents the generation of a new
@@ -104,6 +115,7 @@ class DateDirectoryUploader(SimpleUploader):
 
     /2014/3/28/filename.etc
     """
+
     def get_upload_path(self):
         today = datetime.datetime.today()
         path = '{0}/{1}/{2}'.format(today.year, today.month, today.day)

@@ -11,6 +11,7 @@ GLOBAL_OPTIONS = getattr(settings, 'REDACTOR_OPTIONS', {})
 
 
 class RedactorEditor(widgets.Textarea):
+
     def __init__(self, *args, **kwargs):
         self.upload_to = kwargs.pop('upload_to', '')
         self.custom_options = kwargs.pop('redactor_options', {})

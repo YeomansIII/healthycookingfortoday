@@ -7,9 +7,12 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.encoding import force_str
+from django.views.generic.edit import CreateView
 
 from redactor.forms import ImageForm
 from redactor.utils import import_class, is_module_image_installed
+
+from blanc_basic_assets.models import Image
 
 # deal with python3 basestring
 try:
@@ -20,9 +23,14 @@ else:
     basestring = basestring
 
 
+class ImageCreate(CreateView):
+    model = Image
+    fields = ['title', 'file']
+
+
 class RedactorUploadView(FormView):
     form_class = ImageForm
-    http_method_names = ('post',)
+    http_method_names = ('post')
     upload_to = getattr(settings, 'REDACTOR_UPLOAD', 'redactor/')
     upload_handler = getattr(settings, 'REDACTOR_UPLOAD_HANDLER',
                              'redactor.handlers.SimpleUploader')
@@ -39,7 +47,8 @@ class RedactorUploadView(FormView):
     def dispatch(self, request, *args, **kwargs):
         if not is_module_image_installed():
             data = {
-                'error': _("ImproperlyConfigured: Neither Pillow nor PIL could be imported: No module named 'Image'"),
+                'error': _("ImproperlyConfigured:" +
+                           " Neither Pillow nor PIL could be imported: No module named 'Image'"),
             }
             return HttpResponse(json.dumps(data),
                                 content_type='application/json')
@@ -48,7 +57,7 @@ class RedactorUploadView(FormView):
                                                         **kwargs)
 
     def form_invalid(self, form):
-        # TODO: Needs better error messages
+        print('invalid form')
         try:
             error = form.errors.values()[-1][-1]
         except:
@@ -56,7 +65,28 @@ class RedactorUploadView(FormView):
         data = {
             'error': error,
         }
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return HttpResponse('' + json.dumps(data), content_type='application/json')
+
+    # def form_valid(self, form):
+    #     print(form)
+    #     file_ = form.cleaned_data['file']
+    #     title = form.cleaned_data['title']
+    #     print(file_)
+    #     # handler_class = import_class(self.upload_handler)
+    #     # uploader = handler_class(file_,
+    #     #                         upload_to=self.kwargs.get('upload_to', None))
+    #     # uploader.save_file()
+    #     image = Image(category=ImageCategory.objects.all()[0],
+    #                   title=title, file=file_)
+    #     image.save()
+    #     file_name = force_str(title)
+    #     file_url = force_str(image.get_absolute_url())
+    #     data = {
+    #         'filelink': file_url,
+    #         'filename': file_name,
+    #     }
+    #
+    # return HttpResponse(json.dumps(data), content_type='application/json')
 
     def form_valid(self, form):
         file_ = form.cleaned_data['file']
