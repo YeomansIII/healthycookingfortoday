@@ -91,7 +91,12 @@ module.exports = function(grunt) {
           'materialdesignicons-webfont.svg': 'mdi/fonts/materialdesignicons-webfont.svg',
           'materialdesignicons-webfont.ttf': 'mdi/fonts/materialdesignicons-webfont.ttf',
           'materialdesignicons-webfont.woff': 'mdi/fonts/materialdesignicons-webfont.woff',
-          'materialdesignicons-webfont.woff2': 'mdi/fonts/materialdesignicons-webfont.woff2'
+          'materialdesignicons-webfont.woff2': 'mdi/fonts/materialdesignicons-webfont.woff2',
+          'Material-Design-Icons.eot': 'Materialize/font/material-design-icons/Material-Design-Icons.eot',
+          'Material-Design-Icons.svg': 'Materialize/font/material-design-icons/Material-Design-Icons.svg',
+          'Material-Design-Icons.ttf': 'Materialize/font/material-design-icons/Material-Design-Icons.ttf',
+          'Material-Design-Icons.woff': 'Materialize/font/material-design-icons/Material-Design-Icons.woff',
+          'Material-Design-Icons.woff2': 'Materialize/font/material-design-icons/Material-Design-Icons.woff2'
         }
       }
     },
