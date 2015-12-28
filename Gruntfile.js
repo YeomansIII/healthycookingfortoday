@@ -138,8 +138,7 @@ module.exports = function(grunt) {
     'uglify',
     'sass',
     'bowercopy',
-    'imagemin',
-    'watch'
+    'imagemin'
   ]);
 
 };
