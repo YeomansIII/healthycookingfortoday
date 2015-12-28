@@ -32,6 +32,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REDACTOR_OPTIONS = {'lang': 'en'}
 REDACTOR_UPLOAD = 'uploads/'
+
+FROALA_UPLOAD_PATH = 'uploads/images'
 # Application definition
 
 INSTALLED_APPS = (
