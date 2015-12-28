@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'taggit',
     'frontend',
     'blogger',
-    'redactor',
+    'froala_editor',
     'markdown_deux',
     'blanc_basic_assets'
 )

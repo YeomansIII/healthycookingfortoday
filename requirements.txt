@@ -9,3 +9,4 @@ requests==2.8.1
 wheel==0.24.0
 Pillow==2.9
 blanc-basic-assets==0.3.2
+django-froala-editor==2.0.1
