@@ -101,7 +101,7 @@ module.exports = function(grunt) {
           'material-design-icons/Material-Design-Icons.ttf': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.ttf',
           'material-design-icons/Material-Design-Icons.woff': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.woff',
           'material-design-icons/Material-Design-Icons.woff2': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.woff2',
-          'roboto/Robot-Thin.eot': '<%= config.src %>/static/fonts/Roboto-Thin.eot'
+          'roboto/Roboto-Thin.eot': '<%= config.src %>/static/fonts/Roboto-Thin.eot'
         }
       }
     },
