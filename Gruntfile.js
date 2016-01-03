@@ -101,7 +101,27 @@ module.exports = function(grunt) {
           'material-design-icons/Material-Design-Icons.ttf': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.ttf',
           'material-design-icons/Material-Design-Icons.woff': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.woff',
           'material-design-icons/Material-Design-Icons.woff2': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.woff2',
-          'roboto/Roboto-Thin.eot': '<%= config.src %>/static/fonts/Roboto-Thin.eot'
+          'roboto/Roboto-Thin.eot': '<%= config.src %>/static/fonts/Roboto-Thin.eot',
+          'roboto/Roboto-Thin.ttf': 'bower_components/Materialize/font/roboto/Roboto-Thin.ttf',
+          'roboto/Roboto-Thin.woff': 'bower_components/Materialize/font/roboto/Roboto-Thin.woff',
+          'roboto/Roboto-Thin.woff2': 'bower_components/Materialize/font/roboto/Roboto-Thin.woff2',
+          'roboto/Roboto-Bold.eot': '<%= config.src %>/static/fonts/Roboto-Bold.eot',
+          'roboto/Roboto-Bold.ttf': 'bower_components/Materialize/font/roboto/Roboto-Bold.ttf',
+          'roboto/Roboto-Bold.woff': 'bower_components/Materialize/font/roboto/Roboto-Bold.woff',
+          'roboto/Roboto-Bold.woff2': 'bower_components/Materialize/font/roboto/Roboto-Bold.woff2',
+          'roboto/Roboto-Light.eot': '<%= config.src %>/static/fonts/Roboto-Light.eot',
+          'roboto/Roboto-Light.ttf': 'bower_components/Materialize/font/roboto/Roboto-Light.ttf',
+          'roboto/Roboto-Light.woff': 'bower_components/Materialize/font/roboto/Roboto-Light.woff',
+          'roboto/Roboto-Light.woff2': 'bower_components/Materialize/font/roboto/Roboto-Light.woff2',
+          'roboto/Roboto-Medium.eot': '<%= config.src %>/static/fonts/Roboto-Medium.eot',
+          'roboto/Roboto-Medium.ttf': 'bower_components/Materialize/font/roboto/Roboto-Medium.ttf',
+          'roboto/Roboto-Medium.woff': 'bower_components/Materialize/font/roboto/Roboto-Medium.woff',
+          'roboto/Roboto-Medium.woff2': 'bower_components/Materialize/font/roboto/Roboto-Medium.woff2',
+          'roboto/Roboto-Regular.eot': '<%= config.src %>/static/fonts/Roboto-Regular.eot',
+          'roboto/Roboto-Regular.ttf': 'bower_components/Materialize/font/roboto/Roboto-Regular.ttf',
+          'roboto/Roboto-Regular.woff': 'bower_components/Materialize/font/roboto/Roboto-Regular.woff',
+          'roboto/Roboto-Regular.woff2': 'bower_components/Materialize/font/roboto/Roboto-Regular.woff2',
+
         }
       }
     },
