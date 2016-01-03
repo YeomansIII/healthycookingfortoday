@@ -59,16 +59,15 @@ module.exports = function(grunt) {
 
     bowercopy: {
       options: {
-        srcPrefix: 'bower_components'
+        srcPrefix: ''
       },
       scripts: {
         options: {
           destPrefix: '<%= config.build %>/static/js'
         },
         files: {
-          'jquery.min.js': 'jquery/dist/jquery.min.js',
-          'materialize.min.js': 'Materialize/dist/js/materialize.min.js',
-          'quill.min.js': 'quill/dist/quill.min.js'
+          'jquery.min.js': 'bower_components/jquery/dist/jquery.min.js',
+          'materialize.min.js': 'bower_components/Materialize/dist/js/materialize.min.js'
         }
       },
       css: {
@@ -76,10 +75,8 @@ module.exports = function(grunt) {
           destPrefix: '<%= config.build %>/static/css'
         },
         files: {
-          'materialize.min.css': 'Materialize/dist/css/materialize.min.css',
-          'materialdesignicons.min.css': 'mdi/css/materialdesignicons.min.css',
-          'quill.base.css': 'quill/dist/quill.base.css',
-          'quill.snow.css': 'quill/dist/quill.snow.css'
+          'materialize.min.css': 'bower_components/Materialize/dist/css/materialize.min.css',
+          'materialdesignicons.min.css': 'bower_components/mdi/css/materialdesignicons.min.css'
         }
       },
       fonts: {
@@ -87,11 +84,11 @@ module.exports = function(grunt) {
           destPrefix: '<%= config.build %>/static/fonts'
         },
         files: {
-          'materialdesignicons-webfont.eot': 'mdi/fonts/materialdesignicons-webfont.eot',
-          'materialdesignicons-webfont.svg': 'mdi/fonts/materialdesignicons-webfont.svg',
-          'materialdesignicons-webfont.ttf': 'mdi/fonts/materialdesignicons-webfont.ttf',
-          'materialdesignicons-webfont.woff': 'mdi/fonts/materialdesignicons-webfont.woff',
-          'materialdesignicons-webfont.woff2': 'mdi/fonts/materialdesignicons-webfont.woff2'
+          'materialdesignicons-webfont.eot': 'bower_components/mdi/fonts/materialdesignicons-webfont.eot',
+          'materialdesignicons-webfont.svg': 'bower_components/mdi/fonts/materialdesignicons-webfont.svg',
+          'materialdesignicons-webfont.ttf': 'bower_components/mdi/fonts/materialdesignicons-webfont.ttf',
+          'materialdesignicons-webfont.woff': 'bower_components/mdi/fonts/materialdesignicons-webfont.woff',
+          'materialdesignicons-webfont.woff2': 'bower_components/mdi/fonts/materialdesignicons-webfont.woff2'
         }
       },
       font: {
@@ -99,11 +96,12 @@ module.exports = function(grunt) {
           destPrefix: '<%= config.build %>/static/font'
         },
         files: {
-          'material-design-icons/Material-Design-Icons.eot': 'Materialize/font/material-design-icons/Material-Design-Icons.eot',
-          'material-design-icons/Material-Design-Icons.svg': 'Materialize/font/material-design-icons/Material-Design-Icons.svg',
-          'material-design-icons/Material-Design-Icons.ttf': 'Materialize/font/material-design-icons/Material-Design-Icons.ttf',
-          'material-design-icons/Material-Design-Icons.woff': 'Materialize/font/material-design-icons/Material-Design-Icons.woff',
-          'material-design-icons/Material-Design-Icons.woff2': 'Materialize/font/material-design-icons/Material-Design-Icons.woff2'
+          'material-design-icons/Material-Design-Icons.eot': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.eot',
+          'material-design-icons/Material-Design-Icons.svg': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.svg',
+          'material-design-icons/Material-Design-Icons.ttf': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.ttf',
+          'material-design-icons/Material-Design-Icons.woff': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.woff',
+          'material-design-icons/Material-Design-Icons.woff2': 'bower_components/Materialize/font/material-design-icons/Material-Design-Icons.woff2',
+          'roboto/Robot-Thin.eot': '<%= config.src %>/static/fonts/Roboto-Thin.eot'
         }
       }
     },
