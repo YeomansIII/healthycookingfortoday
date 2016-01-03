@@ -1,7 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load i18n %}
 {% load admin_urls %}
-{% load markdown_deux_tags %}
 {# {% load markup %}#}
 {# {% load comments %}#}
 
@@ -43,25 +42,24 @@
         <div class="row">
           <div class="col s12 m10 l6">
             <div class="card hoverable post">
-	      <div class="card-image">
-		<img src="http://www.healthycookingfortoday.com/IMG_0848.JPG" >
-		<span class="card-title">{{p.title}}</span>
+	      <div class="card-image" {% if p.header %}style="background-image:url({{p.header.get_absolute_url}})"{% endif %}>
+		      <span class="card-title"><a href="{{p.get_absolute_url}}">{{p.title}}</a></span>
 	      </div>
-              <div class="card-content">
-      	        <!--<h3 class="post-title-list"><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url p|admin_urlname:'change' p.id %}">(edit)</a></small>{% endif %}</h3>-->
-                      <p>{{p.publish_at}} |
-                          {% if p.tags.count < 1 %}
-                              No tags
-                          {% endif %}
-                          {% for t in p.tags.all %}
-                              <a href="{{t.get_absolute_url}}">{{t}}</a>
-                              {% if not forloop.last %}
-                              ,
-                              {% endif%}
-                          {%endfor%}
-                      </p>
-      	        	<div class="post-body flow-text">{{p.body|truncatechars:300|striptags}}</div>
-                </div>
+            <div class="card-content">
+    	        <!--<h3 class="post-title-list"><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url p|admin_urlname:'change' p.id %}">(edit)</a></small>{% endif %}</h3>-->
+                    <p>{{p.publish_at}} |
+                        {% if p.tags.count < 1 %}
+                            No tags
+                        {% endif %}
+                        {% for t in p.tags.all %}
+                            <a href="{{t.get_absolute_url}}">{{t}}</a>
+                            {% if not forloop.last %}
+                            ,
+                            {% endif%}
+                        {%endfor%}
+                    </p>
+    	        	<div class="post-body flow-text">{{p.body|truncatechars:300|striptags}}</div>
+              </div>
             </div>
           </div>
         </div>

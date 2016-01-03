@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from .managers import PostManager
+from blanc_basic_assets.models import Image
 
 
 class ClassName(object):
@@ -51,6 +52,8 @@ class Post(models.Model):
     """
     app_label = "blogger"
     model_name = "post"
+
+    header = models.ForeignKey(Image, blank=True, null=True)
 
     author = models.ForeignKey(User, blank=True, verbose_name=_("author"))
     title = models.CharField(max_length=200, unique=True,
