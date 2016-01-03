@@ -90,9 +90,42 @@ BLOG_SETTINGS = {
         'auto_promote': False,
     },
     'info': {  # attached to all responses so the information is available to the templates.
-        'BLOG_TITLE': 'My Blog Name',
-        'BLOG_SUBTITLE': 'Blog subname',
+        'BLOG_TITLE': 'Healthy Cooking for Today',
+        'BLOG_SUBTITLE': 'By Marianne Yeomans',
     }
+}
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode
+    'iframe': False,  # or set False to use SummernoteInplaceWidget - no iframe mode
+
+    # Using Summernote Air-mode
+    'airMode': False,
+
+    # Use native HTML tags (`<b>`, `<i>`, ...) instead of style attributes
+    # (Firefox, Chrome only)
+    'styleWithTags': True,
+
+    # Set text direction : 'left to right' is default.
+    'direction': 'ltr',
+
+    # Change editor size
+    'width': '50%',
+    'height': '480px',
+
+    # Use proper language setting automatically (default)
+    'lang': None,
+
+    # Customize toolbar buttons
+    'toolbar': [
+        ['style', ['style']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'picture', 'video', 'table', 'hr']],
+    ],
+
+    # Need authentication while uploading attachments.
+    'attachment_require_authentication': True,
 }
 
 WSGI_APPLICATION = 'settings.wsgi.application'
