@@ -20,6 +20,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^froala_editor/', include('froala_editor.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
     url(r'^', include('blogger.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,9 @@ from django.db import models
 # from redactor.widgets import AdminRedactorEditor
 # from django import forms
 # from redactor.widgets import RedactorEditor
-from froala_editor.widgets import FroalaEditor
+# from froala_editor.widgets import FroalaEditor
+from django_summernote.widgets import SummernoteInplaceWidget  # , SummernoteInplaceWidget
+
 from .models import Post
 
 
@@ -26,7 +28,7 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     formfield_overrides = {
         #     models.TextField: {'widget': AdminRedactorEditor},
-        models.TextField: {'widget': FroalaEditor()},
+        models.TextField: {'widget': SummernoteInplaceWidget()},
     }
 
     # http://stackoverflow.com/questions/753704/manipulating-data-in-djangos-admin-panel-on-save

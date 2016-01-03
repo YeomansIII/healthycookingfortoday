@@ -51,8 +51,7 @@ INSTALLED_APPS = (
     'taggit',
     'frontend',
     'blogger',
-    'froala_editor',
-    'markdown_deux',
+    'django_summernote',
     'blanc_basic_assets'
 )
 
