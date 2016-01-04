@@ -41,6 +41,7 @@ FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view'
 # Application definition
 
 INSTALLED_APPS = (
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -110,7 +111,7 @@ SUMMERNOTE_CONFIG = {
     'direction': 'ltr',
 
     # Change editor size
-    'width': '50%',
+    'width': '400px',
     'height': '480px',
 
     # Use proper language setting automatically (default)
