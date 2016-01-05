@@ -2,9 +2,11 @@
 
 <div class="section post">
   <!--<img class="post-head-img" src="http://www.healthycookingfortoday.com/IMG_0848.JPG"/>-->
-  <h1 class="post-title" {% if p.header %} style="background-image=url({{p.header.get_absolute_url}})" {% endif %}>{{post.title}} {% if user.is_authenticated %}
-    <small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>
-    {% endif %}</h1>
+  <div class="post-title-wrapper">
+    <h1 class="post-title">{{post.title}} {% if user.is_authenticated %}
+      <small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>
+      {% endif %}</h1>
+  </div>
   <div class="flow-text post-info">
     <p class="post-created-author"><i>Posted by {{post.author}} on {{post.publish_at.date}}</i></p>
   </div>

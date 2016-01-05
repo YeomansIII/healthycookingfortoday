@@ -171,4 +171,13 @@ module.exports = function(grunt) {
     'imagemin'
   ]);
 
+  grunt.registerTask('serve', [
+    'concat',
+    'uglify',
+    'sass',
+    'bowercopy',
+    'imagemin',
+    'watch'
+  ]);
+
 };
