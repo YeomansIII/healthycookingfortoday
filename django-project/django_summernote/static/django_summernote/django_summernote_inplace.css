@@ -7,12 +7,20 @@
 .note-editable {
   font-family: 'Roboto', sans-serif !important;
   font-weight: 300;
+  font-size: 1.2vw !important;
+  img {
+    height: auto !important;
+  }
 }
-.form-row p {
+.note-editable img {
+  height: auto !important;
+}
+/*.form-row p {
   font-family: 'Roboto', sans-serif !important;
   font-weight: 300;
   font-size: 1.2vw !important;
-}
+}*/
+
 form .aligned div.note-editable p, form .aligned div.note-editable ul {
   padding-left: 0;
   margin-left: 2px;
