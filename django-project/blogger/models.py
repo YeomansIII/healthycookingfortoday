@@ -46,6 +46,15 @@ class Author(User):
         return ' '.join([self.first_name, self.last_name])
 
 
+class Postable(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+
+    class Meta:
+        abstract = True
+
+class Recipe(Postable):
+    
+
 class Post(models.Model):
     """
     User generated blog post
