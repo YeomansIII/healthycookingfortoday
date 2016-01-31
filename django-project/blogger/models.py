@@ -48,12 +48,17 @@ class Author(User):
 
 class Postable(models.Model):
     name = models.CharField(max_length=200, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name=_("created at"))
 
-    class Meta:
-        abstract = True
 
 class Recipe(Postable):
-    
+    text = models.TextField()
+
+
+class Body(Postable):
+    text = models.TextField()
+
 
 class Post(models.Model):
     """
@@ -67,7 +72,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, blank=True, verbose_name=_("author"))
     title = models.CharField(max_length=200, unique=True,
                              verbose_name=_("title"))
-    body = models.TextField(verbose_name=_("body"))
+    content = models.ManyToManyField(Postable)
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name=_("created at"))
     publish_at = models.DateTimeField(verbose_name=_("publish at"))
