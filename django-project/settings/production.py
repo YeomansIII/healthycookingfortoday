@@ -21,8 +21,8 @@ PROJECT_PATH = (os.path.join(os.path.dirname(
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-DEBUG = True
-ALLOWED_HOSTS = ['']
+DEBUG = os.getenv('HEALTHY_COOKING_DB_ENGINE', False)
+ALLOWED_HOSTS = [os.getenv('HEALTHY_COOKING_HOST', '')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -143,8 +143,8 @@ AUTH_LDAP_CACHE_GROUPS = True
 AUTH_LDAP_REQUIRE_GROUP = "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io"
 AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn"}
 AUTH_LDAP_USER_FLAGS_BY_GROUP = {
-    "is_staff": "cn=healthycookingdjangodev,ou=groups,dc=yeomans,dc=io",
-    "is_superuser": "cn=healthycookingdjangodevsuper,ou=groups,dc=yeomans,dc=io"
+    "is_staff": "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io",
+    "is_superuser": "cn=healthycookingdjangosuper,ou=groups,dc=yeomans,dc=io"
 }
 
 AUTH_LDAP_BIND_DN = ""
@@ -161,16 +161,17 @@ AUTHENTICATION_BACKENDS = (
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'development!key!**only**'
+SECRET_KEY = os.getenv('HEALTHY_COOKING_SECRET', 'not-very-secret')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'healthycookingdb',
+        'ENGINE': os.getenv('HEALTHY_COOKING_DB_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('HEALTHY_COOKING_DB_NAME', 'healthycooking'),
+        'USER': os.getenv('HEALTHY_COOKING_DB_USER', 'django'),
+        'PASSWORD': os.getenv('HEALTHY_COOKING_DB_PASS', 'password'),
+        'HOST': os.getenv('HEALTHY_COOKING_DB_HOST', 'localhost'),
+        'PORT': os.getenv('HEALTHY_COOKING_DB_PORT', ''),
     },
 }
 
