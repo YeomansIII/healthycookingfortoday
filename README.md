@@ -36,7 +36,9 @@ Node is used in this project for javascript task running such as compiling SASS 
 1. Navigate to a common directory where you want to store your virtual environments and github projects, below is a sample structure:
     ```
     ../development/
+    
         venvs/
+        
         git/
     ```
 2. Navigate into the `git/` directory and clone this project if you haven't done so already
