@@ -43,7 +43,7 @@ Node is used in this project for javascript task running such as compiling SASS 
     ```
 2. Navigate into the `git/` directory and clone this project if you haven't done so already
     ```
-    git clone git@github.com:YeomansIII/healthycookingfortoday.git
+    git clone https://github.com/YeomansIII/healthycookingfortoday.git
     ```
 3. Navigate into the `venvs/` directory and run `virtualenv healthycooking`
 4. Start the new virtual environment
