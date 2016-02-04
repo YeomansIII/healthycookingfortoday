@@ -12,6 +12,7 @@ sudo pip install --upgrade virtualenv
 ### Setup node and npm using Node Version Manager (nvm)
 
 Node is used in this project for javascript task running such as compiling SASS and minifying javascript.
+
 1. Install nvm
     ```
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
