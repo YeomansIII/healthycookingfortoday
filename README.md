@@ -84,3 +84,12 @@ Node is used in this project for javascript task running such as compiling SASS 
     python manage.py gruntserver
     ```
 - Navigate to `localhost:8000` in your browser :)
+
+
+### Every time you want to work on the project
+Every time you want to work on the project you will need to remember to activate the appropriate node version and the healthycooking virtual environment:
+
+```
+nvm use 0.12.7
+source ~/development/venvs/healthycooking/bin/activate
+```
