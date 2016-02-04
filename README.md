@@ -77,6 +77,14 @@ Node is used in this project for javascript task running such as compiling SASS 
     npm install
     bower install
     ```
+    
+7. Make migrations for the sqllite database, move into `django-project/`
+
+    ```
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+    You must run these any time you make model changes
 
 ### Run the project
 - You are now ready to run the project! Move into the `django-project/` directory and run:
