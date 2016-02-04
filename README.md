@@ -82,6 +82,7 @@ Node is used in this project for javascript task running such as compiling SASS 
 
     ```
     python manage.py makemigrations
+    python manage.py makemigrations blogger
     python manage.py migrate
     ```
     You must run these any time you make model changes
