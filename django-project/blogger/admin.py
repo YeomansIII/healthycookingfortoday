@@ -4,9 +4,10 @@ from django.db import models
 # from django import forms
 # from redactor.widgets import RedactorEditor
 # from froala_editor.widgets import FroalaEditor
-from django_summernote.widgets import SummernoteInplaceWidget  # , SummernoteInplaceWidget
+# , SummernoteInplaceWidget
+from django_summernote.widgets import SummernoteInplaceWidget
 
-from .models import Post
+from .models import Post, Body, Recipe
 
 
 #  class PostAdminForm(forms.ModelForm):
@@ -16,6 +17,8 @@ from .models import Post
 #         widgets = {
 #             'body': RedactorEditor(),
 #         }
+class PostableInline(admin.TabularInline):
+    model = Post.content.through
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -30,6 +33,9 @@ class PostAdmin(admin.ModelAdmin):
         #     models.TextField: {'widget': AdminRedactorEditor},
         models.TextField: {'widget': SummernoteInplaceWidget()},
     }
+    inlines = [
+        PostableInline,
+    ]
 
     # http://stackoverflow.com/questions/753704/manipulating-data-in-djangos-admin-panel-on-save
     def save_model(self, request, obj, form, change):
@@ -41,3 +47,5 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Body)
+admin.site.register(Recipe)
