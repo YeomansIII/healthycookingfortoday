@@ -67,7 +67,7 @@ Node is used in this project for javascript task running such as compiling SASS 
 5. Move into your `git/healthycookingfortoday/` directory and install the pip dependencies
 
     ```
-    sudo apt-get install python-dev libldap2-dev libssl-dev
+    sudo apt-get update && sudo apt-get install python-dev libldap2-dev libssl-dev
     pip install -r requirements.txt
     ```
     This installs all of the required dependencies for the project which are listed in the `requirements.txt` file.
