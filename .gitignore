@@ -51,6 +51,7 @@ coverage.xml
 *.log
 django-project/media/
 django-project/uploads/
+django-project/healthycookingdb
 
 # Sphinx documentation
 docs/_build/
