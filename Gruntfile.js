@@ -137,6 +137,15 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      main: {
+        expand: true,
+        cwd: '<%= config.src %>/static/css/',
+        src: 'summernote2.css',
+        dest: '<%= config.build %>/static/css/',
+      },
+    },
+
     watch: {
       options: {
         livereload: true
@@ -161,6 +170,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Register tasks here.
   grunt.registerTask('default', [
@@ -168,7 +178,8 @@ module.exports = function(grunt) {
     'uglify',
     'sass',
     'bowercopy',
-    'imagemin'
+    'imagemin',
+    'copy'
   ]);
 
   grunt.registerTask('serve', [
@@ -177,6 +188,7 @@ module.exports = function(grunt) {
     'sass',
     'bowercopy',
     'imagemin',
+    'copy',
     'watch'
   ]);
 

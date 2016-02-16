@@ -5,8 +5,8 @@ from django.db import models
 # from redactor.widgets import RedactorEditor
 # from froala_editor.widgets import FroalaEditor
 # , SummernoteInplaceWidget
-#from django_summernote.widgets import SummernoteInplaceWidget
-from django_summernote.admin import SummernoteModelAdmin
+from django_summernote.widgets import SummernoteInplaceWidget
+# from django_summernote.admin import SummernoteModelAdmin
 from .models import Post, Recipe, Ingredient
 
 
@@ -25,15 +25,19 @@ class RecipeInline(admin.TabularInline):
     model = Post.recipes.through
 
 
-class RecipeAdmin(SummernoteModelAdmin):
+class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
     filter_horizontal = ('ingredients',)
+    formfield_overrides = {
+        models.TextField: {'widget': SummernoteInplaceWidget()},
+    }
+
     # inlines = [
     #     IngredientInline,
     # ]
 
 
-class PostAdmin(SummernoteModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     """Admin panel class for Post"""
     exclude = ('author',)
     date_hierarchy = 'created_at'
@@ -41,10 +45,10 @@ class PostAdmin(SummernoteModelAdmin):
     list_filter = ['author', 'created_at', 'published']
     search_fields = ('title', 'body')
     prepopulated_fields = {"slug": ("title",)}
-    # formfield_overrides = {
-    #     #     models.TextField: {'widget': AdminRedactorEditor},
-    #     models.TextField: {'widget': SummernoteInplaceWidget()},
-    # }
+    formfield_overrides = {
+        models.TextField: {'widget': SummernoteInplaceWidget()},
+    }
+
     inlines = [
         RecipeInline,
     ]
@@ -56,6 +60,11 @@ class PostAdmin(SummernoteModelAdmin):
             obj.author = request.user
         # obj.set_slug()
         obj.save()
+
+    class Media:
+        css = {
+            'all': ('/static/css/summernote2.css',)
+        }
 
 admin.site.register(Ingredient)
 admin.site.register(Post, PostAdmin)
