@@ -46,18 +46,18 @@ class Author(User):
         return ' '.join([self.first_name, self.last_name])
 
 
-class Postable(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+class Ingredient(models.Model):
+    name = models.CharField(max_length=200)
+    quantity = models.IntegerField()
+    unit = models.CharField(max_length=10)
+
+
+class Recipe(models.Model):
+    name = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name=_("created at"))
-
-
-class Recipe(Postable):
     text = models.TextField()
-
-
-class Body(Postable):
-    text = models.TextField()
+    ingredients = models.ManyToManyField(Ingredient)
 
 
 class Post(models.Model):
@@ -72,7 +72,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, blank=True, verbose_name=_("author"))
     title = models.CharField(max_length=200, unique=True,
                              verbose_name=_("title"))
-    content = models.ManyToManyField(Postable)
+    body = models.TextField(verbose_name=_("body"))
+    recipes = models.ManyToManyField(Recipe)
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name=_("created at"))
     publish_at = models.DateTimeField(verbose_name=_("publish at"))

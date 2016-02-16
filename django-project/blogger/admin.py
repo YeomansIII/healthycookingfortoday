@@ -5,9 +5,9 @@ from django.db import models
 # from redactor.widgets import RedactorEditor
 # from froala_editor.widgets import FroalaEditor
 # , SummernoteInplaceWidget
-from django_summernote.widgets import SummernoteInplaceWidget
-
-from .models import Post, Body, Recipe
+#from django_summernote.widgets import SummernoteInplaceWidget
+from django_summernote.admin import SummernoteModelAdmin
+from .models import Post, Recipe, Ingredient
 
 
 #  class PostAdminForm(forms.ModelForm):
@@ -17,11 +17,23 @@ from .models import Post, Body, Recipe
 #         widgets = {
 #             'body': RedactorEditor(),
 #         }
-class PostableInline(admin.TabularInline):
-    model = Post.content.through
+class IngredientInline(admin.TabularInline):
+    model = Recipe.ingredients.through
 
 
-class PostAdmin(admin.ModelAdmin):
+class RecipeInline(admin.TabularInline):
+    model = Post.recipes.through
+
+
+class RecipeAdmin(SummernoteModelAdmin):
+    model = Recipe
+    filter_horizontal = ('ingredients',)
+    # inlines = [
+    #     IngredientInline,
+    # ]
+
+
+class PostAdmin(SummernoteModelAdmin):
     """Admin panel class for Post"""
     exclude = ('author',)
     date_hierarchy = 'created_at'
@@ -29,12 +41,12 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['author', 'created_at', 'published']
     search_fields = ('title', 'body')
     prepopulated_fields = {"slug": ("title",)}
-    formfield_overrides = {
-        #     models.TextField: {'widget': AdminRedactorEditor},
-        models.TextField: {'widget': SummernoteInplaceWidget()},
-    }
+    # formfield_overrides = {
+    #     #     models.TextField: {'widget': AdminRedactorEditor},
+    #     models.TextField: {'widget': SummernoteInplaceWidget()},
+    # }
     inlines = [
-        PostableInline,
+        RecipeInline,
     ]
 
     # http://stackoverflow.com/questions/753704/manipulating-data-in-djangos-admin-panel-on-save
@@ -45,7 +57,6 @@ class PostAdmin(admin.ModelAdmin):
         # obj.set_slug()
         obj.save()
 
-
+admin.site.register(Ingredient)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Body)
-admin.site.register(Recipe)
+admin.site.register(Recipe, RecipeAdmin)
