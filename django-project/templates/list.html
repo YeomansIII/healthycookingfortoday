@@ -40,7 +40,7 @@
 	{% if posts %}
 	    {% for p in posts %}
         <div class="row">
-          <div class="col s12 m10 l6">
+          <div class="col s12 m10 l6 offset-m1 offset-l3">
             <div class="card hoverable post">
 	      <div class="card-image" {% if p.header %}style="background-image:url({{p.header.get_absolute_url}})"{% endif %}>
 		      <span class="card-title"><a href="{{p.get_absolute_url}}">{{p.title}}</a></span>
