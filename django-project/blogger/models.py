@@ -48,8 +48,11 @@ class Author(User):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
-    quantity = models.IntegerField()
+    quantity = models.CharField(max_length=10)
     unit = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return self.quantity + self.unit + ' ' + self.name
 
 
 class Recipe(models.Model):
@@ -58,6 +61,9 @@ class Recipe(models.Model):
                                       verbose_name=_("created at"))
     text = models.TextField()
     ingredients = models.ManyToManyField(Ingredient)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Post(models.Model):

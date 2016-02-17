@@ -10,5 +10,18 @@
   <div class="flow-text post-info">
     <p class="post-created-author"><i>Posted by {{post.author}} on {{post.publish_at.date}}</i></p>
   </div>
-  <div class="post-body flow-text">{{post.body|safe}}</div>
+  <div class="post-body flow-text">{{post.body|safe}} {% for recipe in post.recipes.all %}
+    <h4>{{ recipe.name }}</h4>
+    <p>
+      {{ recipe.text | safe }}
+    </p>
+    <div class="row">
+      {% for ingredient in recipe.ingredients.all %}
+      <div class="col s12">
+        {{ ingredient.quantity }}{{ ingredient.unit }} {{ ingredient.name }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
 </div>
