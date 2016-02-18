@@ -38,8 +38,7 @@ FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view'
 # Application definition
 
 INSTALLED_APPS = (
-    'jet.dashboard',
-    'jet',
+    'djangocms_admin_style',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
