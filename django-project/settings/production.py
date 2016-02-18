@@ -21,7 +21,7 @@ PROJECT_PATH = (os.path.join(os.path.dirname(
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-DEBUG = os.getenv('HEALTHY_COOKING_DB_ENGINE', False)
+DEBUG = os.getenv('HEALTHY_COOKING_DEBUG', False)
 ALLOWED_HOSTS = [os.getenv('HEALTHY_COOKING_HOST', '')]
 
 MEDIA_URL = '/media/'
