@@ -7,7 +7,7 @@ from django.db import models
 # , SummernoteInplaceWidget
 from django_summernote.widgets import SummernoteInplaceWidget
 # from django_summernote.admin import SummernoteModelAdmin
-from .models import Post, Recipe, Ingredient
+from .models import Post, Recipe, Ingredient, RecipeStep
 
 
 #  class PostAdminForm(forms.ModelForm):
@@ -17,8 +17,12 @@ from .models import Post, Recipe, Ingredient
 #         widgets = {
 #             'body': RedactorEditor(),
 #         }
+class RecipeStepInline(admin.TabularInline):
+    model = RecipeStep
+
+
 class IngredientInline(admin.TabularInline):
-    model = Recipe.ingredients.through
+    model = Ingredient
 
 
 class RecipeInline(admin.TabularInline):
@@ -27,14 +31,13 @@ class RecipeInline(admin.TabularInline):
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
-    filter_horizontal = ('ingredients',)
     formfield_overrides = {
         models.TextField: {'widget': SummernoteInplaceWidget()},
     }
-
-    # inlines = [
-    #     IngredientInline,
-    # ]
+    inlines = [
+        IngredientInline,
+        RecipeStepInline,
+    ]
 
 
 class PostAdmin(admin.ModelAdmin):

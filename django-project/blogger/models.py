@@ -46,24 +46,35 @@ class Author(User):
         return ' '.join([self.first_name, self.last_name])
 
 
+class Recipe(models.Model):
+    name = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name=_("created at"))
+    image = models.ForeignKey(Image, blank=True, null=True)
+    text = models.TextField(blank=True, null=True)
+    # ingredients = models.ManyToManyField(Ingredient)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=200)
     quantity = models.CharField(max_length=10)
     unit = models.CharField(max_length=10, blank=True)
+    recipe = models.ForeignKey(Recipe)
 
     def __unicode__(self):
         return self.quantity + ' ' + self.unit + ' ' + self.name
 
 
-class Recipe(models.Model):
+class RecipeStep(models.Model):
     name = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True,
-                                      verbose_name=_("created at"))
     text = models.TextField()
-    ingredients = models.ManyToManyField(Ingredient)
+    recipe = models.ForeignKey(Recipe)
 
     def __unicode__(self):
-        return self.name
+        return self.step
 
 
 class Post(models.Model):
@@ -79,7 +90,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True,
                              verbose_name=_("title"))
     body = models.TextField(verbose_name=_("body"))
-    recipes = models.ManyToManyField(Recipe)
+    recipes = models.ManyToManyField(Recipe, blank=True)
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name=_("created at"))
     publish_at = models.DateTimeField(verbose_name=_("publish at"))

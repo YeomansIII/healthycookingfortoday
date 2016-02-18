@@ -10,18 +10,29 @@
   <div class="flow-text post-info">
     <p class="post-created-author"><i>Posted by {{post.author}} on {{post.publish_at.date}}</i></p>
   </div>
-  <div class="post-body flow-text">{{post.body|safe}} {% for recipe in post.recipes.all %}
-    <h4>{{ recipe.name }}</h4>
-    <p>
-      {{ recipe.text | safe }}
-    </p>
-    <div class="row">
-      {% for ingredient in recipe.ingredients.all %}
-      <div class="col s6">
-        {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
+  <div class="post-body flow-text">{{post.body|safe}} </div>
+  {% for recipe, ingredients, steps in recipes %}
+  <div class="card large">
+    <div class="card-content">
+      <div class="card-title">{{ recipe.name }}</div>
+      <p>
+        {{ recipe.text | safe }}
+      </p>
+      <div class="row">
+        <img class="col s12 m6" src="{{recipe.image.get_absolute_url}}" />        {% for ingredient in ingredients %}
+        <div class="col s12 m6">
+          {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+      <ol>
+        {% for step in steps %}
+        <li>
+          {{ step.text }}
+        </li>
+        {% endfor %}
+      </ol>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
 </div>

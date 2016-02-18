@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import permissions
-from blogger.models import Post, Author
+from blogger.models import Post, Author, Ingredient, RecipeStep
 import datetime
 from .permissions import IsOwnerOrReadOnly
 from .serializers import PostSerializer, AuthorSerializer
@@ -125,6 +125,15 @@ def list(request, year=None, month=None, tag=None, author=None):
 def view_post(request, slug):
 
     post = Post.objects.get(slug=slug)
+    ingredients = []
+    steps = []
+    recipes = post.recipes.all()
+    for recipe in recipes:
+        ing_mods = Ingredient.objects.filter(recipe=recipe)
+        step_mods = RecipeStep.objects.filter(recipe=recipe)
+        ingredients.append(ing_mods)
+        steps.append(step_mods)
+    recipe_zip = zip(recipes, ingredients, steps)
     if not post.published:
         messages.add_message(request, messages.SUCCESS,
                              _('Post does not exist or is not published yet.'))
@@ -133,6 +142,7 @@ def view_post(request, slug):
     sidebar_data = get_sidebar_data()
     data = {
         'post': post,
+        'recipes': recipe_zip,
     }
     data.update(sidebar_data)
     return render_to_response('view_post.html', data,
