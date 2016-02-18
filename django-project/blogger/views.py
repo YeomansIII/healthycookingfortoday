@@ -155,8 +155,18 @@ def view_latest(request):
     if Post.objects.count() > 0:
         post = Post.objects.filter(
             publish_at__lte=datetime.datetime.now()).order_by('-publish_at')[0]
+        ingredients = []
+        steps = []
+        recipes = post.recipes.all()
+        for recipe in recipes:
+            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            ingredients.append(ing_mods)
+            steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients, steps)
         data = {
-            'post': post
+            'post': post,
+            'recipes': recipe_zip,
         }
     return render_to_response('index.html', data,
                               context_instance=RequestContext(request)

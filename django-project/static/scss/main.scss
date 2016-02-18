@@ -27,6 +27,11 @@ p {
 .parallax-container .section {
   width: 100%;
 }
+.page-footer {
+  .social-links {
+    font-size: 1.3rem;
+  }
+}
 @media only screen and (max-width: 992px) {
   .parallax-container .section {
     position: absolute;
