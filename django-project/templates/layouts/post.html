@@ -19,7 +19,7 @@
         {{ recipe.text | safe }}
       </p>
       <div class="row">
-        <img class="col s12 m6" src="{{recipe.image.get_absolute_url}}" />        {% for ingredient in ingredients %}
+        {% if recipe.image %}<img class="col s12 m6" src="{{recipe.image.get_absolute_url}}" />{% endif %}        {% for ingredient in ingredients %}
         <div class="col s12 m6">
           {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
         </div>

@@ -151,11 +151,13 @@ def view_post(request, slug):
 
 
 def view_latest(request):
-    post = Post.objects.filter(
-        publish_at__lte=datetime.datetime.now()).order_by('-publish_at')[0]
-    data = {
-        'post': post
-    }
+    data = {}
+    if Post.objects.count() > 0:
+        post = Post.objects.filter(
+            publish_at__lte=datetime.datetime.now()).order_by('-publish_at')[0]
+        data = {
+            'post': post
+        }
     return render_to_response('index.html', data,
                               context_instance=RequestContext(request)
                               )

@@ -87,6 +87,12 @@
       height: auto !important;
     }
   }
+  .card {
+    height: auto;
+    .card-content {
+      height: auto;
+    }
+  }
 }
 .postlist-wrapper {
   padding: 5vw 0;

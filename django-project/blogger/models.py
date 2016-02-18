@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from .managers import PostManager
 from blanc_basic_assets.models import Image
+from django.utils.html import remove_tags
 
 
 class ClassName(object):
@@ -74,7 +75,7 @@ class RecipeStep(models.Model):
     recipe = models.ForeignKey(Recipe)
 
     def __unicode__(self):
-        return self.step
+        return self.name
 
 
 class Post(models.Model):
@@ -106,6 +107,10 @@ class Post(models.Model):
 
     objects = models.Manager()  # The default manager.
     popular_posts = PostManager()
+
+    def save(self, *args, **kwargs):
+        self.body = remove_tags(self.body, "font span")
+        super(Post, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _("post")
