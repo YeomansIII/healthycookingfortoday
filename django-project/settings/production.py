@@ -143,8 +143,8 @@ AUTH_LDAP_CACHE_GROUPS = True
 AUTH_LDAP_REQUIRE_GROUP = "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io"
 AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn"}
 AUTH_LDAP_USER_FLAGS_BY_GROUP = {
-    "is_staff": "cn=healthycookingdjangodev,ou=groups,dc=yeomans,dc=io",
-    "is_superuser": "cn=healthycookingdjangodevsuper,ou=groups,dc=yeomans,dc=io"
+    "is_staff": "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io",
+    "is_superuser": "cn=healthycookingdjangosuper,ou=groups,dc=yeomans,dc=io"
 }
 
 AUTH_LDAP_BIND_DN = ""
