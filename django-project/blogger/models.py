@@ -60,9 +60,9 @@ class Recipe(models.Model):
 
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=200)
     quantity = models.CharField(max_length=10)
     unit = models.CharField(max_length=10, blank=True)
+    name = models.CharField(max_length=200)
     recipe = models.ForeignKey(Recipe)
 
     def __unicode__(self):
