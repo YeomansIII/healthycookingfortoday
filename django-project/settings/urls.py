@@ -19,7 +19,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^admin/', admin.site.urls),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^', include('blogger.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

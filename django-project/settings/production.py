@@ -38,7 +38,7 @@ FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view'
 # Application definition
 
 INSTALLED_APPS = (
-    'djangocms_admin_style',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'django_summernote',
     'blanc_basic_assets'
 )
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
