@@ -27,9 +27,6 @@ ALLOWED_HOSTS = ['']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-REDACTOR_OPTIONS = {'lang': 'en'}
-REDACTOR_UPLOAD = 'uploads/'
-
 FROALA_UPLOAD_PATH = 'uploads/images'
 FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view', 'colors', 'emoticons',
                          'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image', 'image_manager', 'inline_style',

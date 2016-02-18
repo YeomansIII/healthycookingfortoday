@@ -27,8 +27,8 @@ ALLOWED_HOSTS = [os.getenv('HEALTHY_COOKING_HOST', '')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-REDACTOR_OPTIONS = {'lang': 'en'}
-REDACTOR_UPLOAD = 'uploads/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 FROALA_UPLOAD_PATH = 'uploads/images'
 FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view', 'colors', 'emoticons',
@@ -38,6 +38,7 @@ FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view'
 # Application definition
 
 INSTALLED_APPS = (
+    'jet.dashboard',
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -108,8 +109,7 @@ SUMMERNOTE_CONFIG = {
     'direction': 'ltr',
 
     # Change editor size
-    'width': '400px',
-    'height': '780px',
+    'height': '500px',
 
     # Use proper language setting automatically (default)
     'lang': None,
@@ -143,8 +143,8 @@ AUTH_LDAP_CACHE_GROUPS = True
 AUTH_LDAP_REQUIRE_GROUP = "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io"
 AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn"}
 AUTH_LDAP_USER_FLAGS_BY_GROUP = {
-    "is_staff": "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io",
-    "is_superuser": "cn=healthycookingdjangosuper,ou=groups,dc=yeomans,dc=io"
+    "is_staff": "cn=healthycookingdjangodev,ou=groups,dc=yeomans,dc=io",
+    "is_superuser": "cn=healthycookingdjangodevsuper,ou=groups,dc=yeomans,dc=io"
 }
 
 AUTH_LDAP_BIND_DN = ""
