@@ -200,5 +200,4 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'build/static'),
-    os.path.join(BASE_DIR, 'froala_editor/static'),
 )
