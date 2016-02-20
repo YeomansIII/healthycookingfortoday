@@ -25,16 +25,8 @@ DEBUG = os.getenv('HEALTHY_COOKING_DEBUG', False)
 ALLOWED_HOSTS = [os.getenv('HEALTHY_COOKING_HOST', '')]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.getenv('HEALTHY_COOKING_MEDIA_ROOT', '/home/django/media/')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-FROALA_UPLOAD_PATH = 'uploads/images'
-FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier', 'code_view', 'colors', 'emoticons',
-                         'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image', 'image_manager', 'inline_style',
-                         'line_breaker', 'link', 'lists', 'paragraph_format', 'paragraph_style', 'quote', 'save', 'table',
-                         'url', 'video')
 # Application definition
 
 INSTALLED_APPS = (
