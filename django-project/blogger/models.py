@@ -89,7 +89,7 @@ class Recipe(models.Model):
 
 
 class Ingredient(models.Model):
-    quantity = models.CharField(max_length=10)
+    quantity = models.CharField(max_length=10, blank=True)
     unit = models.CharField(max_length=10, blank=True)
     name = models.CharField(max_length=200)
     recipe = models.ForeignKey(Recipe)
