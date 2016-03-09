@@ -106,3 +106,15 @@
   overflow: hidden;
   vertical-align: middle;
 }
+@media #{$medium-and-down} {
+  .fleft-padding {
+    width: 100% !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .fright-padding {
+    width: 100% !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
