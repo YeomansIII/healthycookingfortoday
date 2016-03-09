@@ -12,33 +12,12 @@
   </div>
   <div class="post-body flow-text">{{post.body|safe}} </div>
   {% for recipe, ingredients, steps in recipes %}
-  <div class="card large">
-    <div class="card-title">{{ recipe.name }}</div>
-    <div class="card-content">
-      <p>
-        {{ recipe.text | safe }}
-      </p>
-      <div class="row ingredients">
-        {% if recipe.image %}<img class="col s12 m6" src="{{recipe.image.get_absolute_url}}"
-        />{% endif %} {% for ingredient in ingredients %}
-        <div class="col s12 m6 ingredient">
-          {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
-        </div>
-        {% endfor %}
-      </div>
-      {% for step in steps %}
-      <div class="row step">
-        <div class="col s2 m1" style="text-align: center">
-          <div class="step-num">
-            {{ forloop.counter }}
-          </div>
-        </div>
-        <div class="col s10 m11">
-          {{ step.text }}
-        </div>
-      </div>
-      {% endfor %}
+    <hr class="style-one"/>
+    {% if recipe.text %}
+    <div class="flow-text">
+      {{ recipe.text | safe }}
     </div>
-  </div>
+    {% endif %}
+    {% include 'layouts/recipe.html' %}
   {% endfor %}
 </div>

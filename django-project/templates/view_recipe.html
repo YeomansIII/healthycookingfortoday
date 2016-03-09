@@ -9,12 +9,15 @@
 
 {% block content %}
 <div class="contain-wrapper">
-	<div class="post-header" {% if post.header %} style="background-image:url({{post.header.get_absolute_url}})"
-	{% endif %}></div>
 	<div class="container halign-row">
 		<div class="row">
 			<div class="col s12 m12 l10 offset-l1">
-				{% include 'layouts/post.html' %}
+				{% include 'layouts/recipe.html' %}
+				{% if recipe.text %}
+				<div class="flow-text">
+				  {{ recipe.text | safe }}
+				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>

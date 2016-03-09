@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import permissions
-from blogger.models import Post, Author, Ingredient, RecipeStep
+from blogger.models import Post, Author, Ingredient, RecipeStep, Recipe
 import datetime
 from .permissions import IsOwnerOrReadOnly
 from .serializers import PostSerializer, AuthorSerializer
@@ -39,10 +39,44 @@ def get_sidebar_data():
     return data
 
 
+def get_recipe_sidebar_data():
+    recipes = Recipe.objects.filter(promoted=True).order_by('-created_at')
+    ingredients = []
+    steps = []
+    for recipe in recipes:
+        ing_mods = Ingredient.objects.filter(recipe=recipe)
+        step_mods = RecipeStep.objects.filter(recipe=recipe)
+        ingredients.append(ing_mods)
+        steps.append(step_mods)
+    recipe_zip = zip(recipes, ingredients, steps)
+    promoted_recipes = recipe_zip
+    # popular_recipes = Recipe.popular_posts.all().order_by('-created_at')[:5]
+    recent_recipes = Recipe.objects.all().order_by('-created_at')[:5]
+    archive = Recipe.objects.all().datetimes('created_at', 'month', order='DESC')
+    tags = Tag.objects.all()
+    authors = Author.objects.all()
+    data = {
+        'promoted_recipes': promoted_recipes,
+        # 'popular_recipes': popular_recipes,
+        'recent_recipes': recent_recipes,
+        'archive': archive,
+        'tags': tags,
+        'authors': authors,
+    }
+    return data
+
+
 # renders data onto list.html for the current theme
 def render_on_list(request, data):
 
     return render_to_response('list.html', data,
+                              context_instance=RequestContext(request)
+                              )
+
+
+def render_on_list_recipes(request, data):
+
+    return render_to_response('list_recipes.html', data,
                               context_instance=RequestContext(request)
                               )
 
@@ -146,6 +180,122 @@ def view_post(request, slug):
     }
     data.update(sidebar_data)
     return render_to_response('view_post.html', data,
+                              context_instance=RequestContext(request)
+                              )
+
+
+def list_recipes(request, year=None, month=None, tag=None, author=None):
+
+    sidebar_data = get_recipe_sidebar_data()
+
+    data = {
+        'recipes': None,
+        'section_title': _('Recipes')
+    }
+
+    data.update(sidebar_data)
+
+    # TODO: refactor this if if if if block
+    # tag archive
+    if tag:
+        recipes = Recipe.objects.filter(created_at__lte=datetime.datetime.now(),
+                                        tags__slug=tag)
+        ingredients = []
+        steps = []
+        for recipe in recipes:
+            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            ingredients.append(ing_mods)
+            steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients, steps)
+        data['recipes'] = recipe_zip
+        data['section_title'] = _("Tag archive")
+        return render_on_list_recipes(request, data)
+
+    # author archive
+    if author:
+        fname, lname = author.split('-')
+        recipes = Recipe.objects.filter(created_at__lte=datetime.datetime.now(),
+                                        author__first_name=fname,
+                                        author__last_name=lname
+                                        ).order_by('-created_at')
+        ingredients = []
+        steps = []
+        for recipe in recipes:
+            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            ingredients.append(ing_mods)
+            steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients, steps)
+        data['recipes'] = recipe_zip
+        data['section_title'] = _("Author archive")
+        return render_on_list_recipes(request, data)
+    # all posts
+    if not year:
+        recipes = Recipe.objects.filter(
+            created_at__lte=datetime.datetime.now()).order_by('-created_at')
+        data['enable_promoted'] = True
+        ingredients = []
+        steps = []
+        for recipe in recipes:
+            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            ingredients.append(ing_mods)
+            steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients, steps)
+        data['recipes'] = recipe_zip
+        data['section_title'] = _("All Recipes")
+        return render_on_list_recipes(request, data)
+    # yearly archive
+    if not month:
+        recipes = Recipe.objects.filter(created_at__lte=datetime.datetime.now(),
+                                        created_at__year=year
+                                        ).order_by('-created_at')
+        ingredients = []
+        steps = []
+        for recipe in recipes:
+            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            ingredients.append(ing_mods)
+            steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients, steps)
+        data['recipes'] = recipe_zip
+        data['section_title'] = _("Yearly Archive")
+        return render_on_list_recipes(request, data)
+    # monthly archive
+    else:
+        recipes = Recipe.objects.filter(created_at__lte=datetime.datetime.now(),
+                                        created_at__year=year,
+                                        created_at__month=month
+                                        ).order_by('-created_at')
+
+        ingredients = []
+        steps = []
+        for recipe in recipes:
+            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            ingredients.append(ing_mods)
+            steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients, steps)
+        data['recipes'] = recipe_zip
+        data['section_title'] = _("Monthly Archive")
+        return render_on_list_recipes(request, data)
+
+
+# renders a single post
+def view_recipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
+    ingredients = Ingredient.objects.filter(recipe=recipe)
+    steps = RecipeStep.objects.filter(recipe=recipe)
+
+    sidebar_data = get_sidebar_data()
+    data = {
+        'recipe': recipe,
+        'ingredients': ingredients,
+        'steps': steps,
+    }
+    data.update(sidebar_data)
+    return render_to_response('view_recipe.html', data,
                               context_instance=RequestContext(request)
                               )
 

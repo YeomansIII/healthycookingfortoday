@@ -1,0 +1,36 @@
+.recipe.card {
+  font-size: 1.2rem;
+  font-weight: 300;
+  height: auto;
+  background: url('/static/images/linedpaper.png') repeat;
+  .card-title {
+    padding: 15px 25px;
+    background-color: $teal;
+    color: $white;
+    font-weight: 400;
+    font-size: 1.7rem;
+    a {
+      color: $white;
+      transition: color 300ms;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .card-content {
+    height: auto;
+    //padding-top: 0;
+    .ingredient {
+      margin: 5px 0;
+    }
+    .step {
+      .step-num {
+        width: 1.7em;
+        margin: auto;
+        border: 2px solid $teal;
+        border-radius: 1000px;
+        //background-color: $light-teal;
+      }
+    }
+  }
+}

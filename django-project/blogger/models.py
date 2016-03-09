@@ -7,6 +7,8 @@ from taggit.managers import TaggableManager
 from .managers import PostManager
 from blanc_basic_assets.models import Image
 from django.utils.html import remove_tags
+from autoslug import AutoSlugField
+import uuid
 
 
 class ClassName(object):
@@ -48,15 +50,42 @@ class Author(User):
 
 
 class Recipe(models.Model):
-    name = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True,
-                                      verbose_name=_("created at"))
+    app_label = "blogger"
+    model_name = "recipe"
+
+    title = models.CharField(max_length=200, verbose_name=_("title"))
     image = models.ForeignKey(Image, blank=True, null=True)
     text = models.TextField(blank=True, null=True)
+    promoted = models.BooleanField(default=BLOG_SETTINGS['auto_promote'],
+                                   verbose_name=_("promoted?"))
+
+    tags = TaggableManager()
+    slug = AutoSlugField(populate_from='title', verbose_name=_("slug"))
+
+    author = models.ForeignKey(User, blank=True, verbose_name=_("author"))
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name=_("created at"))
+    objects = models.Manager()  # The default manager.
     # ingredients = models.ManyToManyField(Ingredient)
 
+    def save(self, *args, **kwargs):
+        if(self.text is not None):
+            self.text = remove_tags(self.text, "font span")
+        super(Recipe, self).save(*args, **kwargs)
+
     def __unicode__(self):
-        return self.name
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('view_recipe', args=[str(self.slug)])
+
+    def get_tags(self):
+        """Returns tags as a composite string"""
+        names = ', '.join([t.name for t in self.tags.all()])
+        # if len(names) > 20:
+        #    names = names[:20] + "..."
+        return names
+    get_tags.short_description = _("Tags")
 
 
 class Ingredient(models.Model):

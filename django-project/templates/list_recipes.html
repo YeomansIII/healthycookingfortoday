@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+{% load i18n %}
+{% load admin_urls %}
+{# {% load markup %}#}
+{# {% load comments %}#}
+
+{% block content %}
+
+<div id="index-banner" class="index-banner parallax-container allalign">
+  <h1 class="header center white-text header-tape">{{ section_title }}</h1>
+  <div class="parallax">
+    <img class="imageposition-bottom" src="/static/images/autumn-2.jpg" alt="Autumn parallax image">
+  </div>
+</div>
+<div class="container halign-row">
+  <div class="row">
+    {% if enable_promoted %}
+        {% if promoted_recipes %}
+            <h3 class="section-header">Promoted Recipes</h3>
+            {% for recipe, ingredients, steps in promoted_recipes %}
+              <div class="col s12 m12 l10 offset-l1">
+                {% include 'layouts/recipe.html' %}
+              </div>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+	{% if recipes %}
+      {% for recipe, ingredients, steps in recipes %}
+        <div class="col s12 m12 l10 offset-l1">
+          {% include 'layouts/recipe.html' %}
+        </div>
+      {% endfor %}
+	{% endif %}
+  </div>
+</div>
+{% endblock %}
