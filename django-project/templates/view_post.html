@@ -19,4 +19,13 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		if(window.getUrlParameter('print')) {
+			var url = window.location.href;
+			window.location.href = url.split("?")[0];
+			window.print();
+		}
+	});
+</script>
 {% endblock %}

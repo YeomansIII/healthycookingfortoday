@@ -2,13 +2,38 @@
 
 <div class="section post">
   <h1 class="featured-post-title">{{post.title}} {% if user.is_authenticated %}
-    <small><a href="{% url post|admin_urlname:'change' post.id %}">(edit)</a></small>
+    <small><a href="{% url post|admin_urlname:'change' post.id %}"><i class="mdi mdi-pencil"></i></a></small>
     {% endif %}</h1>
   <div class="flow-text post-info">
-    <p class="post-created-author"><i>Posted by {{post.author}} on {{post.publish_at.date}}</i></p>
+    <div class="post-created-author">Posted by {{post.author}} on {{post.publish_at.date}}</div>
+    <div class="right">
+      <a class="modal-trigger" href="#modal-article"><i class="mdi mdi-share-variant"></i></a>
+      <!-- Modal Structure -->
+      <div id="modal-article" class="modal-article modal-share modal bottom-sheet">
+        <div class="modal-content">
+          <h4>Share article via</h4>
+          <div class="row shares">
+            <a href="#"><div class="col l4 s12 share facebook"><i class="mdi mdi-facebook"></i> Facebook</div></a>
+            <a href="#"><div class="col l4 s12 share twitter"><i class="mdi mdi-twitter"></i> Twitter</div></a>
+            <a href="#"><div class="col l4 s12 share google-plus"><i class="mdi mdi-google-plus"></i> Google +</div></a>
+          </div>
+        </div>
+      </div>
+      {% if aprint %}
+        <a href="javascript:window.print()"><i class="mdi mdi-printer"></i></a>
+      {% else %}
+        <a href="{{ recipe.get_absolute_url }}?print"><i class="mdi mdi-printer"></i></a>
+      {% endif %}
+    </div>
   </div>
   <div class="post-body flow-text">{{post.body|safe}} </div>
   {% for recipe, ingredients, steps in recipes %}
+    {% if recipe.text %}
+    <hr class="style-one"/>
+    <div class="flow-text">
+      {{ recipe.text | safe }}
+    </div>
+    {% endif %}
     {% include 'layouts/recipe.html' %}
   {% endfor %}
 </div>

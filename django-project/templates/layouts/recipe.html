@@ -2,8 +2,28 @@
 
 <div class="card large recipe">
   <div class="card-title"><a href="{{recipe.get_absolute_url}}">{{ recipe.title }}</a>{% if user.is_authenticated %}
-    <small><a href="{% url recipe|admin_urlname:'change' recipe.id %}">(edit)</a></small>
-    {% endif %}</div>
+    <a href="{% url recipe|admin_urlname:'change' recipe.id %}"><i class="mdi mdi-pencil"></i></a>
+    {% endif %}
+    <div class="right">
+      <a class="modal-trigger" href="#modal-recipe{{forloop.counter0}}"><i class="mdi mdi-share-variant"></i></a>
+      <!-- Modal Structure -->
+      <div id="modal-recipe{{forloop.counter0}}" class="modal-recipe modal-share modal bottom-sheet">
+        <div class="modal-content">
+          <h4>Share recipe via</h4>
+          <div class="row shares">
+            <a href="#"><div class="col l4 s12 share facebook"><i class="mdi mdi-facebook"></i> Facebook</div></a>
+            <a href="#"><div class="col l4 s12 share twitter"><i class="mdi mdi-twitter"></i> Twitter</div></a>
+            <a href="#"><div class="col l4 s12 share google-plus"><i class="mdi mdi-google-plus"></i> Google +</div></a>
+          </div>
+        </div>
+      </div>
+      {% if rprint %}
+        <a href="javascript:window.print()"><i class="mdi mdi-printer"></i></a>
+      {% else %}
+        <a href="{{ recipe.get_absolute_url }}?print"><i class="mdi mdi-printer"></i></a>
+      {% endif %}
+    </div>
+  </div>
   <div class="card-content flow-text">
     <div class="row ingredients">
       {% if recipe.image %}<img class="col s12 m6" src="{{recipe.image.get_absolute_url}}"
@@ -13,17 +33,23 @@
       </div>
       {% endfor %}
     </div>
-    {% for step in steps %}
-    <div class="row step">
-      <div class="col s2 m1" style="text-align: center">
-        <div class="step-num">
-          {{ forloop.counter }}
+    {% if steps %}
+      {% for step in steps %}
+      <div class="row step">
+        <div class="col s2 m1" style="text-align: center">
+          <div class="step-num">
+            {{ forloop.counter }}
+          </div>
+        </div>
+        <div class="col s10 m11">
+          {{ step.text }}
         </div>
       </div>
-      <div class="col s10 m11">
-        {{ step.text }}
+      {% endfor %}
+    {% else %}
+      <div class="view-more">
+        <a href="{{recipe.get_absolute_url}}">View Recipe</a>
       </div>
-    </div>
-    {% endfor %}
+    {% endif %}
   </div>
 </div>

@@ -77,7 +77,17 @@
     }
   }
   .post-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 1.2em;
+    margin: 15px 0;
+    .post-created-author {
+      font-style: italic;
+    }
+    a {
+      font-size: 2em;
+    }
   }
   .post-body {
     font-family: 'Roboto', sans-serif;

@@ -4,6 +4,7 @@
 @import 'post';
 @import 'recipe';
 @import 'admin';
+@import 'print';
 body {
   background-color: $white;
   font-family: 'Roboto', sans-serif;
@@ -31,6 +32,39 @@ p {
 .page-footer {
   .social-links {
     font-size: 1.3rem;
+  }
+}
+.modal-share {
+  color: $text-color;
+  .modal-content {
+    .shares {
+      margin: 0;
+      a {
+        color: $white;
+        transition: color 300ms;
+        font-size: 1.8rem;
+        font-weight: 300;
+        &:hover {
+          color: $text-color;
+        }
+        .share {
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          &.facebook {
+            background-color: $facebook-blue;
+          }
+          &.twitter {
+            background-color: $twitter-blue;
+          }
+          &.google-plus {
+            background-color: $google-plus-red;
+          }
+        }
+      }
+    }
   }
 }
 @media only screen and (max-width: 992px) {

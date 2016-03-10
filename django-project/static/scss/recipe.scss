@@ -1,6 +1,7 @@
 .recipe.card {
   font-size: 1.2rem;
   font-weight: 300;
+  margin: 20px 0;
   height: auto;
   background: url('/static/images/linedpaper.png') repeat;
   .card-title {
@@ -16,6 +17,11 @@
         color: $black;
       }
     }
+    .right {
+      float: right;
+
+    }
+
   }
   .card-content {
     height: auto;
@@ -32,5 +38,22 @@
         //background-color: $light-teal;
       }
     }
+    .view-more {
+      text-align: right;
+      //background-color: $white;
+      a {
+        transition: color 300ms;
+        &:hover {
+          color: $black;
+
+        }
+      }
+    }
+  }
+}
+.recipe-container {
+  padding: 20px 0;
+  .recipe-row {
+    margin-bottom: 0;
   }
 }

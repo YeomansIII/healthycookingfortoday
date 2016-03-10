@@ -177,6 +177,7 @@ def view_post(request, slug):
     data = {
         'post': post,
         'recipes': recipe_zip,
+        'aprint': True,
     }
     data.update(sidebar_data)
     return render_to_response('view_post.html', data,
@@ -204,10 +205,10 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
-            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
-            steps.append(step_mods)
-        recipe_zip = zip(recipes, ingredients, steps)
+            # steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients)  # , steps)
         data['recipes'] = recipe_zip
         data['section_title'] = _("Tag archive")
         return render_on_list_recipes(request, data)
@@ -223,10 +224,10 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
-            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
-            steps.append(step_mods)
-        recipe_zip = zip(recipes, ingredients, steps)
+            # steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients)  # , steps)
         data['recipes'] = recipe_zip
         data['section_title'] = _("Author archive")
         return render_on_list_recipes(request, data)
@@ -239,10 +240,10 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
-            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
-            steps.append(step_mods)
-        recipe_zip = zip(recipes, ingredients, steps)
+            # steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients)  # , steps)
         data['recipes'] = recipe_zip
         data['section_title'] = _("All Recipes")
         return render_on_list_recipes(request, data)
@@ -255,10 +256,10 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
-            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
-            steps.append(step_mods)
-        recipe_zip = zip(recipes, ingredients, steps)
+            # steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients)  # , steps)
         data['recipes'] = recipe_zip
         data['section_title'] = _("Yearly Archive")
         return render_on_list_recipes(request, data)
@@ -273,10 +274,10 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
-            step_mods = RecipeStep.objects.filter(recipe=recipe)
+            # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
-            steps.append(step_mods)
-        recipe_zip = zip(recipes, ingredients, steps)
+            # steps.append(step_mods)
+        recipe_zip = zip(recipes, ingredients)  # , steps)
         data['recipes'] = recipe_zip
         data['section_title'] = _("Monthly Archive")
         return render_on_list_recipes(request, data)
@@ -293,6 +294,7 @@ def view_recipe(request, slug):
         'recipe': recipe,
         'ingredients': ingredients,
         'steps': steps,
+        'rprint': True,
     }
     data.update(sidebar_data)
     return render_to_response('view_recipe.html', data,
@@ -317,6 +319,7 @@ def view_latest(request):
         data = {
             'post': post,
             'recipes': recipe_zip,
+            'aprint': True,
         }
     return render_to_response('index.html', data,
                               context_instance=RequestContext(request)
