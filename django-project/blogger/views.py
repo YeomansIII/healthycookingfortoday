@@ -202,7 +202,6 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         recipes = Recipe.objects.filter(created_at__lte=datetime.datetime.now(),
                                         tags__slug=tag)
         ingredients = []
-        steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
@@ -221,7 +220,6 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
                                         author__last_name=lname
                                         ).order_by('-created_at')
         ingredients = []
-        steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
@@ -237,7 +235,6 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
             created_at__lte=datetime.datetime.now()).order_by('-created_at')
         data['enable_promoted'] = True
         ingredients = []
-        steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
@@ -253,7 +250,6 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
                                         created_at__year=year
                                         ).order_by('-created_at')
         ingredients = []
-        steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
@@ -271,7 +267,6 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
                                         ).order_by('-created_at')
 
         ingredients = []
-        steps = []
         for recipe in recipes:
             ing_mods = Ingredient.objects.filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
@@ -305,22 +300,24 @@ def view_recipe(request, slug):
 def view_latest(request):
     data = {}
     if Post.objects.count() > 0:
-        post = Post.objects.filter(
-            publish_at__lte=datetime.datetime.now()).order_by('-publish_at')[0]
-        ingredients = []
-        steps = []
-        recipes = post.recipes.all()
-        for recipe in recipes:
-            ing_mods = Ingredient.objects.filter(recipe=recipe)
-            step_mods = RecipeStep.objects.filter(recipe=recipe)
-            ingredients.append(ing_mods)
-            steps.append(step_mods)
-        recipe_zip = zip(recipes, ingredients, steps)
-        data = {
-            'post': post,
-            'recipes': recipe_zip,
-            'aprint': True,
-        }
+        data = {}
+        try:
+            post = Post.objects.filter(
+                publish_at__lte=datetime.datetime.now(), published=True).order_by('-publish_at')[0]
+            data['post'] = post
+            ingredients = []
+            steps = []
+            recipes = post.recipes.all()
+            for recipe in recipes:
+                ing_mods = Ingredient.objects.filter(recipe=recipe)
+                step_mods = RecipeStep.objects.filter(recipe=recipe)
+                ingredients.append(ing_mods)
+                steps.append(step_mods)
+            recipe_zip = zip(recipes, ingredients, steps)
+            data['recipes'] = recipe_zip
+        except IndexError:
+            pass
+        data['aprint'] = True
     return render_to_response('index.html', data,
                               context_instance=RequestContext(request)
                               )
