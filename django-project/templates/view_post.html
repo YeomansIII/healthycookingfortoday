@@ -3,6 +3,10 @@
 {% load admin_urls %}
 {# {% load comments %}#}
 
+{% block ogtitle %}
+	{{post.title}}
+{% endblock %}
+
 {% block title %}
 	{{post.title}}
 {% endblock %}
