@@ -62,7 +62,7 @@ class Recipe(models.Model):
     tags = TaggableManager()
     slug = AutoSlugField(populate_from='title', verbose_name=_("slug"))
 
-    author = models.ForeignKey(User, blank=True, verbose_name=_("author"))
+    author = models.ForeignKey(User, blank=False, verbose_name=_("author"))
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name=_("created at"))
     objects = models.Manager()  # The default manager.

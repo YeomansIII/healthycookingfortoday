@@ -161,7 +161,7 @@ def view_post(request, slug):
     post = Post.objects.get(slug=slug)
     ingredients = []
     steps = []
-    recipes = post.recipes.all()
+    recipes = post.recipes.order_by('created_at').all()
     for recipe in recipes:
         ing_mods = Ingredient.objects.filter(recipe=recipe)
         step_mods = RecipeStep.objects.filter(recipe=recipe)
@@ -307,7 +307,7 @@ def view_latest(request):
             data['post'] = post
             ingredients = []
             steps = []
-            recipes = post.recipes.all()
+            recipes = post.recipes.order_by('created_at').all()
             for recipe in recipes:
                 ing_mods = Ingredient.objects.filter(recipe=recipe)
                 step_mods = RecipeStep.objects.filter(recipe=recipe)
