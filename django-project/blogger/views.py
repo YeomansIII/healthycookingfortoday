@@ -44,8 +44,8 @@ def get_recipe_sidebar_data():
     ingredients = []
     steps = []
     for recipe in recipes:
-        ing_mods = Ingredient.objects.filter(recipe=recipe)
-        step_mods = RecipeStep.objects.filter(recipe=recipe)
+        ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
+        step_mods = RecipeStep.objects.order_by('id').filter(recipe=recipe)
         ingredients.append(ing_mods)
         steps.append(step_mods)
     recipe_zip = zip(recipes, ingredients, steps)
@@ -163,8 +163,8 @@ def view_post(request, slug):
     steps = []
     recipes = post.recipes.order_by('created_at').all()
     for recipe in recipes:
-        ing_mods = Ingredient.objects.filter(recipe=recipe)
-        step_mods = RecipeStep.objects.filter(recipe=recipe)
+        ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
+        step_mods = RecipeStep.objects.order_by('id').filter(recipe=recipe)
         ingredients.append(ing_mods)
         steps.append(step_mods)
     recipe_zip = zip(recipes, ingredients, steps)
@@ -203,7 +203,7 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
                                         tags__slug=tag)
         ingredients = []
         for recipe in recipes:
-            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
             # steps.append(step_mods)
@@ -236,7 +236,7 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
         data['enable_promoted'] = True
         ingredients = []
         for recipe in recipes:
-            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
             # steps.append(step_mods)
@@ -251,7 +251,7 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
                                         ).order_by('-created_at')
         ingredients = []
         for recipe in recipes:
-            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
             # steps.append(step_mods)
@@ -268,7 +268,7 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
 
         ingredients = []
         for recipe in recipes:
-            ing_mods = Ingredient.objects.filter(recipe=recipe)
+            ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
             # step_mods = RecipeStep.objects.filter(recipe=recipe)
             ingredients.append(ing_mods)
             # steps.append(step_mods)
@@ -281,8 +281,8 @@ def list_recipes(request, year=None, month=None, tag=None, author=None):
 # renders a single post
 def view_recipe(request, slug):
     recipe = Recipe.objects.get(slug=slug)
-    ingredients = Ingredient.objects.filter(recipe=recipe)
-    steps = RecipeStep.objects.filter(recipe=recipe)
+    ingredients = Ingredient.objects.order_by('id').filter(recipe=recipe)
+    steps = RecipeStep.objects.order_by('id').filter(recipe=recipe)
 
     sidebar_data = get_sidebar_data()
     data = {
@@ -309,8 +309,8 @@ def view_latest(request):
             steps = []
             recipes = post.recipes.order_by('created_at').all()
             for recipe in recipes:
-                ing_mods = Ingredient.objects.filter(recipe=recipe)
-                step_mods = RecipeStep.objects.filter(recipe=recipe)
+                ing_mods = Ingredient.objects.order_by('id').filter(recipe=recipe)
+                step_mods = RecipeStep.objects.order_by('id').filter(recipe=recipe)
                 ingredients.append(ing_mods)
                 steps.append(step_mods)
             recipe_zip = zip(recipes, ingredients, steps)
