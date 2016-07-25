@@ -1,7 +1,7 @@
 .halign-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 // .halign-row {
 //   .row {
@@ -10,39 +10,70 @@
 //   }
 // }
 .allalign {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &.aa-col {
-    flex-direction: column;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.aa-col {
+        flex-direction: column;
+    }
 }
 .text-shadow {
-  text-shadow: 0 0 25px $black;
+    text-shadow: 0 0 25px $black;
 }
 .header-tape {
-  background-color: $semi-trans6-black;
-  color: $white;
-  width: auto;
-  display: inline-block;
-  margin: 10px auto;
-  @at-root {
-    h1#{&} {
-      padding: 15px;
+    background-color: $semi-trans6-black;
+    color: $white;
+    width: auto;
+    display: inline-block;
+    margin: 10px auto;
+    @at-root {
+        h1#{ &} {
+            padding: 15px;
+        }
+        h5#{ &} {
+            padding: 10px;
+        }
     }
-    h5#{&} {
-      padding: 10px;
-    }
-  }
 }
 hr {
-  border: 0;
-  height: 1px;
-  background: #333;
-  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 hr.style-two {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+hr.style-three {
+    border: 0;
+    height: 1px;
+    background-image: none;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.email-signup {
+    .email-input-wrapper {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .mc-field-group {
+        width: 300px;
+        max-width: 100%;
+        label {
+            color: white;
+        }
+        &.one {
+            padding-right: 10px;
+            @media screen and (max-width: 720px) {
+                padding: 0;
+            }
+        }
+    }
 }

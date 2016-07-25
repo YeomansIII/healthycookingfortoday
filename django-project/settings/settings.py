@@ -147,6 +147,12 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+import logging
+
+logger = logging.getLogger('django_auth_ldap')
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.DEBUG)
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
