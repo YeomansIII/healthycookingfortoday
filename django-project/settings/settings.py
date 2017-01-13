@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'settings',
     'taggit',
-    'frontend',
     'blogger',
     'django_summernote',
     'blanc_basic_assets'

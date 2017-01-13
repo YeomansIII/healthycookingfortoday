@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import permissions
-from blogger.models import Post, Author, Ingredient, RecipeStep, Recipe
+from blogger.models import Post, Author, Ingredient, RecipeStep, Recipe, Header
 import datetime
 from .permissions import IsOwnerOrReadOnly
 from .serializers import PostSerializer, AuthorSerializer
@@ -299,6 +299,7 @@ def view_recipe(request, slug):
 
 def view_latest(request):
     data = {}
+    data['header'] = Header.objects.all().first()
     if Post.objects.count() > 0:
         data = {}
         try:

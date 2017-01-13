@@ -7,7 +7,7 @@ from django.db import models
 # , SummernoteInplaceWidget
 from django_summernote.widgets import SummernoteInplaceWidget
 # from django_summernote.admin import SummernoteModelAdmin
-from .models import Post, Recipe, Ingredient, RecipeStep
+from .models import Post, Recipe, Ingredient, RecipeStep, Header
 
 
 #  class PostAdminForm(forms.ModelForm):
@@ -72,3 +72,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Ingredient)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Recipe, RecipeAdmin)
+admin.site.register(Header)

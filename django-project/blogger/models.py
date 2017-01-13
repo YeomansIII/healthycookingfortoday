@@ -22,6 +22,12 @@ class ClassName(object):
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
 
+class Header(models.Model):
+    title = models.CharField(max_length=50, verbose_name=_("title"))
+    subtitle = models.CharField(max_length=200, verbose_name=_("subtitle"))
+    image = models.ForeignKey(Image, blank=False, null=False)
+
+
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
 

@@ -5,6 +5,22 @@ HealthyCookingForToday
 {% block content %}
 
 <div id="index-banner" class="index-banner parallax-container allalign">
+  {% if header %}
+  <div class="container allalign aa-col center">
+    <br>
+    <br>
+    <h1 class="header center white-text header-tape">{{ header.title }}</h1>
+    <h5 class="header header-tape">{{ header.subtitle }}</h5>
+    <div class="row center">
+      <a href="/list" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">All Posts</a>
+    </div>
+    <br>
+    <br>
+  </div>
+  <div class="parallax">
+    <img class="imageposition-bottom" src="{{ header.image.get_absolute_url }}" alt="Spring parallax image">
+  </div>
+  {% else %}
   <div class="container allalign aa-col center">
     <br>
     <br>
@@ -19,6 +35,7 @@ HealthyCookingForToday
   <div class="parallax">
     <img class="imageposition-bottom" src="/static/images/spring.jpg" alt="Spring parallax image">
   </div>
+  {% endif %}
 </div>
 
 <div class="container halign-row">
