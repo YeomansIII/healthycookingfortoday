@@ -3,8 +3,12 @@ python:
   - '2.7'
 node_js:
   - '6'
+branches:
+  only:
+    - /^v[.].*$/
 install:
   - pip install -r requirements.txt
+  - nvm use 6
   - npm install
 script: grunt
 before_deploy:
@@ -15,8 +19,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script:
-    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/django-project -p 3901 jason@healthycookingfortoday.com:/home/django/
-    - ssh -p 3901 jason@healthycookingfortoday.com 'python /home/django/django-project/manage.py collectstatic'
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/django-project -p 3901 jason@healthycookingfortoday.com:/home/django/
   on:
     tags: true
