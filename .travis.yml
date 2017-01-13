@@ -8,7 +8,7 @@ branches:
     - /^v[.].*$/
 install:
   - pip install -r requirements.txt
-  - nvm use 6
+  - nvm install 6
   - npm install
 script: grunt
 before_deploy:
