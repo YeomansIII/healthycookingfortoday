@@ -118,32 +118,7 @@ SUMMERNOTE_CONFIG = {
 
 WSGI_APPLICATION = 'settings.wsgi.application'
 
-import ldap
-from django_auth_ldap.config import LDAPSearch, PosixGroupType
-
-AUTH_LDAP_SERVER_URI = "ldap://yeomans.io"
-
-AUTH_LDAP_GROUP_SEARCH = LDAPSearch("ou=groups,dc=yeomans,dc=io",
-                                    ldap.SCOPE_SUBTREE,
-                                    "(objectClass=posixGroup)"
-                                    )
-AUTH_LDAP_GROUP_TYPE = PosixGroupType()
-AUTH_LDAP_CACHE_GROUPS = True
-
-AUTH_LDAP_REQUIRE_GROUP = "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io"
-AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn"}
-AUTH_LDAP_USER_FLAGS_BY_GROUP = {
-    "is_staff": "cn=healthycookingdjango,ou=groups,dc=yeomans,dc=io",
-    "is_superuser": "cn=healthycookingdjangosuper,ou=groups,dc=yeomans,dc=io"
-}
-
-AUTH_LDAP_BIND_DN = ""
-AUTH_LDAP_BIND_PASSWORD = ""
-AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=users,dc=yeomans,dc=io",
-                                   ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
-
 AUTHENTICATION_BACKENDS = (
-    'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
